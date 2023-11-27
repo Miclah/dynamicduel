@@ -1,0 +1,43 @@
+/* Fire.css */
+
+.menu-button {
+    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
+    -fx-background-color: #FF4500; /* Fire color */
+    -fx-border: 1px solid #FFFFFF; /* Thin white outline */
+    -fx-text-fill: white; /* White text color */
+    -fx-padding: 15 30; /* Padding for better appearance */
+    -fx-border-radius: 10; /* Round corners */
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.3), 10, 0, 0, 0); /* White drop shadow effect */
+    -fx-transition-duration: 0.3s; /* Button color transition duration */
+    -fx-cursor: hand; /* Change cursor on hover */
+}
+
+.menu-button:hover {
+    -fx-background-color: #FF6347; /* Darker fire color on hover */
+    -fx-translate-x: 5; /* Move the button slightly to the right on hover */
+    -fx-scale-x: 1.05; /* Scale the button on the X-axis on hover */
+    -fx-scale-y: 1.05; /* Scale the button on the Y-axis on hover */
+    -fx-rotate: 3; /* Rotate the button on hover */
+}
+
+.menu-button:pressed {
+    -fx-background-color: #FF6347; /* Even darker fire color when pressed */
+    -fx-translate-x: 2; /* Move the button slightly to the right when pressed */
+    -fx-scale-x: 0.98; /* Scale the button on the X-axis when pressed */
+    -fx-scale-y: 0.98; /* Scale the button on the Y-axis when pressed */
+    -fx-rotate: -3; /* Rotate the button when pressed */
+}
+
+.menu-button:disabled {
+    -fx-opacity: 0.7; /* Reduce opacity for the disabled state */
+}
+
+.menu-button:focus {
+    -fx-border-color: #FFD700; /* Golden border color when the button is focused */
+    -fx-border-width: 2; /* Increase border width when focused */
+}
+
+/* Update other styles as needed */
+
