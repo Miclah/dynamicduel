@@ -1,4 +1,4 @@
-package game.view.Backgrounds.Fire;
+package game.view.Backgrounds;
 
 import javafx.animation.*;
 import javafx.geometry.Insets;
@@ -12,12 +12,12 @@ import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.util.Duration;
 import javafx.scene.text.Text;
-
-import game.view.MainMenu; // Import MainMenu to access AUTHOR, VERSION, and getCurrentDate
+import game.view.MainMenu;
 
 public class FireBackground extends Pane {
 
     public FireBackground() {
+
         // Create a flame animation
         createFlameAnimation();
 
@@ -25,47 +25,40 @@ public class FireBackground extends Pane {
         createFireParticles();
 
         // Create the bottom bar
-        HBox bottomBar = new HBox();
-        bottomBar.setStyle("-fx-background-color: linear-gradient(to right, #FF4500, #8B0000);"); /* Gradient fire background */
-        bottomBar.setMinHeight(20); /* Slimmer bottom bar */
-        bottomBar.setAlignment(Pos.CENTER_LEFT);
-        bottomBar.setPadding(new Insets(5, 20, 5, 20)); /* Padding for better appearance */
-
-        // Adding author's name, date, and version to the bottom bar
-        Text authorText = new Text("Author: " + MainMenu.AUTHOR); // Use the AUTHOR from MainMenu
-        authorText.setStyle("-fx-font-size: 14; -fx-fill: white;"); /* White text color */
-        Text dateText = new Text("Date: " + MainMenu.getCurrentDate()); // Use getCurrentDate() from MainMenu
-        dateText.setStyle("-fx-font-size: 14; -fx-fill: white;");
-        Text versionText = new Text("Version: " + MainMenu.VERSION); // Use the VERSION from MainMenu
-        versionText.setStyle("-fx-font-size: 14; -fx-fill: white;");
-
-        bottomBar.getChildren().addAll(authorText, dateText, versionText);
+        HBox bottomBar = createBottomBar();
 
         // Add the bottom bar to the FireBackground
-        getChildren().add(bottomBar);
+        getChildren().addAll(bottomBar);
+       
     }
 
     private void createFlameAnimation() {
         // Create a flame shape
-        Circle flame = new Circle(175, Color.rgb(255, 140, 0)); // Increase the size to 75
+        Circle flame = new Circle(150, Color.rgb(255, 140, 0)); // Increase the size to 150
         flame.setStroke(Color.rgb(255, 69, 0));
         flame.setStrokeWidth(5);
 
         // Create a flame animation (scaling effect)
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(1), flame);
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(2), flame); // Increase duration
         scaleTransition.setToX(1.2);
         scaleTransition.setToY(1.2);
         scaleTransition.setCycleCount(Animation.INDEFINITE);
         scaleTransition.setAutoReverse(true);
 
         // Create a fade animation
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), flame);
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), flame); // Increase duration
         fadeTransition.setToValue(0.7);
         fadeTransition.setCycleCount(Animation.INDEFINITE);
         fadeTransition.setAutoReverse(true);
 
-        // Create a parallel transition combining scale and fade animations
-        ParallelTransition parallelTransition = new ParallelTransition(scaleTransition, fadeTransition);
+        // Create a rotation animation
+        RotateTransition rotateTransition = new RotateTransition(Duration.seconds(4), flame); // Increase duration
+        rotateTransition.setByAngle(30);
+        rotateTransition.setCycleCount(Animation.INDEFINITE);
+        rotateTransition.setAutoReverse(true);
+
+        // Create a parallel transition combining scale, fade, and rotate animations
+        ParallelTransition parallelTransition = new ParallelTransition(scaleTransition, fadeTransition, rotateTransition);
 
         // Play the parallel transition
         parallelTransition.play();
@@ -74,12 +67,10 @@ public class FireBackground extends Pane {
         getChildren().add(flame);
     }
 
-    // ...
-
     private void createFireParticles() {
         // Create fire particles
-        for (int i = 0; i < 100; i++) {
-            Circle particle = new Circle(2.5, Color.rgb(255, 69, 0)); // Keep the size at 2.5
+        for (int i = 0; i < 200; i++) {
+            Circle particle = new Circle(2, Color.rgb(255, 69, 0)); // Keep the size at 2
 
             getChildren().add(particle);
 
@@ -89,7 +80,7 @@ public class FireBackground extends Pane {
 
             // Apply a fade transition for a more subtle effect
             FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2 + Math.random() * 3), particle);
-            fadeTransition.setFromValue(0.8);
+            fadeTransition.setFromValue(1.0);
             fadeTransition.setToValue(0.2);
             fadeTransition.setCycleCount(Animation.INDEFINITE);
             fadeTransition.setAutoReverse(true);
@@ -113,4 +104,28 @@ public class FireBackground extends Pane {
             parallelTransition.play();
         }
     }
+
+    private HBox createBottomBar() {
+        HBox bottomBar = new HBox();
+        
+        // Adding author's name, date, and version to the bottom bar
+        Text authorText = new Text("Author: " + MainMenu.AUTHOR);
+        authorText.setStyle("-fx-font-size: 16; -fx-fill: white;");
+        Text dateText = new Text("Date: " + MainMenu.getCurrentDate());
+        dateText.setStyle("-fx-font-size: 16; -fx-fill: white;");
+        Text versionText = new Text("Version: " + MainMenu.VERSION);
+        versionText.setStyle("-fx-font-size: 16; -fx-fill: white;");
+
+        bottomBar.setStyle("-fx-background-color: linear-gradient(to right, #8B0000, #1a0000);");
+        bottomBar.setPadding(new javafx.geometry.Insets(10, 20, 10, 20));
+        bottomBar.setAlignment(Pos.BOTTOM_LEFT);
+        HBox.setHgrow(versionText, null);
+        
+
+        
+        bottomBar.getChildren().addAll(authorText, dateText, versionText);
+        return bottomBar;
+    }
+    
+    
 }

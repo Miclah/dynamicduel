@@ -1,20 +1,15 @@
 package game.view;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+import game.view.Backgrounds.FireBackground;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import game.view.Backgrounds.Fire.FireBackground;
-
 
 public class MainMenu extends Application {
 
@@ -27,18 +22,12 @@ public class MainMenu extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Dynamic Duel Main Menu");
-        primaryStage.setResizable(false); 
+        primaryStage.setTitle("Dynamic Duel");
 
         // Creating buttons
         Button startButton = new Button("Start");
         Button settingsButton = new Button("Settings");
         Button exitButton = new Button("Exit");
-
-        // Adding styles to buttons
-        startButton.getStyleClass().add("menu-button");
-        settingsButton.getStyleClass().add("menu-button");
-        exitButton.getStyleClass().add("menu-button");
 
         // Handling button actions
         startButton.setOnAction(e -> System.out.println("Start button clicked"));
@@ -50,42 +39,45 @@ public class MainMenu extends Application {
         vbox.setAlignment(Pos.CENTER);
         vbox.getChildren().addAll(startButton, settingsButton, exitButton);
 
-        // Creating a StackPane to hold the VBox and any additional UI elements
-        StackPane root = new StackPane();
-        int randomBackground = (int) (Math.random() * 4);
+        // Creating a BorderPane to organize the layout
+        BorderPane root = new BorderPane();
 
+        // Randomly select the background and apply styles
+        selectBackgroundAndApplyStyles(root);
 
-        
-
-        switch (randomBackground) {
-            case 0:
-                FireBackground fireBackground = new FireBackground();
-                root.getChildren().addAll(fireBackground, vbox); // Reorder to show the background behind the buttons
-                root.setStyle("-fx-background-color: #2c3e50;"); // Set background color for the entire scene
-                Scene scene = new Scene(root, 800, 600);
-                scene.getStylesheets().add(getClass().getResource("/Styles/Fire.css").toExternalForm());
-                primaryStage.setScene(scene);
-                break;
-            // Add cases for other backgrounds (Water, Earth, Air) as needed
-        }
-        // Adding background style to the root
-        root.setStyle("-fx-background-color: #2c3e50;");
+        // Set the vbox to the center of the root
+        root.setCenter(vbox);
 
         // Creating the scene
+        Scene scene = new Scene(root, 800, 600);
         
-
-        // Adding external CSS for button styling
-
-
         // Setting the scene
+        primaryStage.setScene(scene);
 
         // Displaying the stage
         primaryStage.show();
+
+        
     }
 
-    // Helper method to get the current date
     public static String getCurrentDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(new Date());
+    }
+
+    private void selectBackgroundAndApplyStyles(BorderPane root) {
+        // Generate a random number between 1 and 4
+        int randomBackground = 1;
+
+        // Apply styles based on the selected background
+        switch (randomBackground) {
+            case 1:
+                FireBackground fireBackground = new FireBackground();
+                // Add a style class to FireBackground
+                root.getChildren().add(0, fireBackground);
+                break;
+            default:
+                break;
+        }
     }
 }
