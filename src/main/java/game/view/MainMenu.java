@@ -22,27 +22,29 @@ public class MainMenu extends Application {
 
         // Creating buttons
         Button startButton = new Button("Start");
-        Button settingsButton = new Button("Settings");
+        Button optionsButton = new Button("Options");
         Button exitButton = new Button("Exit");
         
 
         // Handling button actions
         startButton.setOnAction(e -> System.out.println("Start button clicked"));
-        settingsButton.setOnAction(e -> System.out.println("Settings button clicked"));
-        exitButton.setOnAction(e -> System.out.println("Exit button clicked"));
-
+        optionsButton.setOnAction(e -> {
+            // Display the Settings menu
+            Settings.displaySettings(primaryStage);
+        });
         
+        exitButton.setOnAction(e -> primaryStage.close());
 
         // Creating a VBox (vertical box) to hold the buttons
         VBox vbox = new VBox(20);
         vbox.setAlignment(Pos.CENTER);
-        vbox.getChildren().addAll(startButton, settingsButton, exitButton);
+        vbox.getChildren().addAll(startButton, optionsButton, exitButton);
 
         // Creating a BorderPane to organize the layout
         BorderPane root = new BorderPane();
 
         // Randomly select the background and apply styles
-        selectBackgroundAndApplyStyles(root);
+        selectBackground(root);
 
         // Set the vbox to the center of the root
         root.setCenter(vbox);
@@ -61,9 +63,9 @@ public class MainMenu extends Application {
         
     }
 
-    private void selectBackgroundAndApplyStyles(BorderPane root) {
+    private void selectBackground(BorderPane root) {
         // Generate a random number between 1 and 4
-        int randomBackground = 2;
+        int randomBackground = 1;
 
         // Apply styles based on the selected background
         switch (randomBackground) {

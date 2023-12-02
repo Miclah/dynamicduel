@@ -1,0 +1,54 @@
+/* about.css */
+.text {
+    -fx-fill: #fff;
+    -fx-font-size: 18;
+    -fx-padding: 20; /* Add padding to the text */
+    -fx-text-alignment: justify; /* Justify text alignment */
+}
+
+.bold-text {
+    -fx-font-weight: bold;
+}
+
+.button {
+    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -fx-font-size: 18; /* Adjusted font size */
+    -fx-font-weight: bold;
+    -fx-background-color: #3498db;
+    -fx-border-width: 2px;
+    -fx-border-color: #2980b9;
+    -fx-text-fill: #fff;
+    -fx-padding: 10 20;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+    -fx-transition-duration: 0.3s;
+}
+
+.button:hover {
+    -fx-background-color: #47acb5;
+    -fx-border-color: #2c3e50;
+}
+
+.button:pressed {
+    -fx-background-color: #1f618d;
+}
+
+.button:disabled {
+    -fx-opacity: 0.7;
+}
+
+.button:focus {
+    -fx-border-color: #e74c3c;
+    -fx-border-width: 3px;
+}
+
+/* Scrollbar styling */
+.scroll-bar:vertical {
+    -fx-base: #FFA500; /* Change scrollbar color to orange */
+}
+
+.scroll-pane .viewport {
+    -fx-padding: 0 10 0 0; /* Add space between text and scrollbar */
+}
