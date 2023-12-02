@@ -1,12 +1,38 @@
-/* Apply styles only to FireBackground with the specified style class */
-.fire-background .fire-button {
-    -fx-background-color: linear-gradient(to right, #FF4500, #8B0000);
-    -fx-text-fill: white;
-    -fx-font-size: 16;
-    -fx-padding: 10;
-    -fx-background-radius: 5;
+/* fire.css */
+.button {
+    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
+    -fx-background-color: #E74C3C; 
+    -fx-background-radius: 10; 
+    -fx-border-radius: 10; 
+    -fx-background-insets: 0;
+    -fx-border-width: 2px;
+    -fx-border-color: #FFFFFF; 
+    -fx-border-style: solid;
+    -fx-text-fill: white; 
+    -fx-padding: 15 30; 
+    -fx-border-radius: 10; 
+    -fx-effect: 
+        dropshadow(three-pass-box, rgba(255, 69, 0, 0.3), 15, 0, 0, 0), 
+        dropshadow(three-pass-box, white, 5, 0, 0, 0); 
+    -fx-transition-duration: 0.3s; 
+    -fx-cursor: hand; 
 }
 
-.fire-background .fire-button:hover {
-    -fx-background-color: #FF4500;
+.button:hover {
+    -fx-background-color: #C0392B; 
+}
+
+.button:pressed {
+    -fx-background-color: #922B21; 
+}
+
+.button:disabled {
+    -fx-opacity: 0.7;
+}
+
+.button:focus {
+    -fx-border-color: #FFD700; 
+    -fx-border-width: 2; 
 }

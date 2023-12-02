@@ -1,9 +1,6 @@
 package game.view.Backgrounds;
 
 import javafx.animation.*;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -11,24 +8,19 @@ import javafx.scene.shape.CubicCurveTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.util.Duration;
-import javafx.scene.text.Text;
-import game.view.MainMenu;
+
 
 public class FireBackground extends Pane {
 
     public FireBackground() {
 
+       
         // Create a flame animation
         createFlameAnimation();
 
         // Create fire particles
         createFireParticles();
 
-        // Create the bottom bar
-        HBox bottomBar = createBottomBar();
-
-        // Add the bottom bar to the FireBackground
-        getChildren().addAll(bottomBar);
        
     }
 
@@ -104,28 +96,4 @@ public class FireBackground extends Pane {
             parallelTransition.play();
         }
     }
-
-    private HBox createBottomBar() {
-        HBox bottomBar = new HBox();
-        
-        // Adding author's name, date, and version to the bottom bar
-        Text authorText = new Text("Author: " + MainMenu.AUTHOR);
-        authorText.setStyle("-fx-font-size: 16; -fx-fill: white;");
-        Text dateText = new Text("Date: " + MainMenu.getCurrentDate());
-        dateText.setStyle("-fx-font-size: 16; -fx-fill: white;");
-        Text versionText = new Text("Version: " + MainMenu.VERSION);
-        versionText.setStyle("-fx-font-size: 16; -fx-fill: white;");
-
-        bottomBar.setStyle("-fx-background-color: linear-gradient(to right, #8B0000, #1a0000);");
-        bottomBar.setPadding(new javafx.geometry.Insets(10, 20, 10, 20));
-        bottomBar.setAlignment(Pos.BOTTOM_LEFT);
-        HBox.setHgrow(versionText, null);
-        
-
-        
-        bottomBar.getChildren().addAll(authorText, dateText, versionText);
-        return bottomBar;
-    }
-    
-    
 }

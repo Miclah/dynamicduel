@@ -1,0 +1,37 @@
+/* water.css */
+.button {
+    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
+    -fx-background-color: #2c3e50;
+    -fx-background-radius: 10; 
+    -fx-border-radius: 10; 
+    -fx-background-insets: 0; /* Slightly darker background */
+    -fx-border-width: 2px;
+    -fx-border-color:  #3498db;
+    -fx-border-style: solid; /* Border color matches button color */
+    -fx-text-fill: #3498db; /* Text color matches button color */
+    -fx-padding: 15 30;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10; /* Adjusted background radius */
+    -fx-effect: dropshadow(three-pass-box, rgba(52, 152, 219, 0.3), 15, 0, 0, 0);
+    -fx-transition-duration: 0.3s;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #e67e22;
+}
+
+.button:pressed {
+    -fx-background-color: #1f618d; /* Even darker blue when pressed */
+}
+
+.button:disabled {
+    -fx-opacity: 0.7;
+}
+
+.button:focus {
+    -fx-border-color: #FFD700;
+    -fx-border-width: 2;
+}

@@ -1,0 +1,37 @@
+/* air.css */
+.button {
+    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
+    -fx-background-color: #F0F8FF;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-background-insets: 0; /* Adjusted the background color to a light blue shade */
+    -fx-border-width: 2px;
+    -fx-border-color: #4682B4;
+    -fx-border-style: solid;
+    -fx-text-fill: #4682B4;
+    -fx-padding: 15 30;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.3), 15, 0, 0, 0),
+                 dropshadow(three-pass-box, white, 5, 0, 0, 0);
+    -fx-transition-duration: 0.3s;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #B0E0E6; /* Adjusted the hover color to a slightly darker shade */
+}
+
+.button:pressed {
+    -fx-background-color: #F0F8FF;
+}
+
+.button:disabled {
+    -fx-opacity: 0.7;
+}
+
+.button:focus {
+    -fx-border-color: #FFD700;
+    -fx-border-width: 2;
+}
