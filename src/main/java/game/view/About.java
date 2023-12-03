@@ -4,8 +4,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.BorderPane;
@@ -49,11 +47,7 @@ public class About {
         scrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED); // Enable vertical scrollbar
         scrollPane.setStyle("-fx-background: #2c3e50; -fx-background-color: #2c3e50;");
 
-        // Find the vertical scrollbar and set its color
-        ScrollBar vScrollBar = (ScrollBar) scrollPane.lookup(".scroll-bar:vertical");
-        if (vScrollBar != null) {
-            vScrollBar.setStyle("-fx-base: #FFA500;");
-        }
+        
 
         // Create a Back button
         Button backButton = new Button("Back");

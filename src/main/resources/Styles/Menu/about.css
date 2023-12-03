@@ -48,7 +48,3 @@
 .scroll-bar:vertical {
     -fx-base: #FFA500; /* Change scrollbar color to orange */
 }
-
-.scroll-pane .viewport {
-    -fx-padding: 0 10 0 0; /* Add space between text and scrollbar */
-}
