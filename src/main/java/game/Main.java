@@ -12,10 +12,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // Create an instance of the MainMenu class
-        MainMenu mainMenu = new MainMenu();
 
-        // Call the start method of the MainMenu instance
+        MainMenu mainMenu = new MainMenu();
         mainMenu.start(primaryStage);
+        
     }
 }

@@ -4,8 +4,14 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
 import game.view.Backgrounds.AirBackground;
 import game.view.Backgrounds.FireBackground;
 import game.view.Backgrounds.WaterBackground;
@@ -20,77 +26,92 @@ public class MainMenu extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Dynamic Duel");
 
-        // Creating buttons
         Button startButton = new Button("Start");
         Button optionsButton = new Button("Options");
         Button exitButton = new Button("Exit");
         
+        startButton.setOnAction(e -> {
+            Stage gameStage = new Stage();
+            GameView.displayGame(gameStage);
+            primaryStage.hide(); 
+        });
 
-        // Handling button actions
-        startButton.setOnAction(e -> System.out.println("Start button clicked"));
         optionsButton.setOnAction(e -> {
-            // Display the Settings menu
-            Settings.displaySettings(primaryStage);
+            Options.displayOptions(primaryStage);
         });
         
         exitButton.setOnAction(e -> primaryStage.close());
 
-        // Creating a VBox (vertical box) to hold the buttons
         VBox vbox = new VBox(20);
         vbox.setAlignment(Pos.CENTER);
         vbox.getChildren().addAll(startButton, optionsButton, exitButton);
 
-        // Creating a BorderPane to organize the layout
         BorderPane root = new BorderPane();
 
-        // Randomly select the background and apply styles
-        selectBackground(root);
+        this.selectBackground(root);
 
-        // Set the vbox to the center of the root
         root.setCenter(vbox);
 
-        // Creating the scene
         Scene scene = new Scene(root, 800, 600);
         
-
-        // Setting the scene
         primaryStage.setScene(scene);
 
         primaryStage.setResizable(false);
-        // Displaying the stage
+
         primaryStage.show();
 
         
     }
 
-    private void selectBackground(BorderPane root) {
-        // Generate a random number between 1 and 4
-        int randomBackground = 1;
+    private String readSelectedBackgroundFromSettings() {
+        File settingsFile = new File(Settings.SETTINGS_FILE_PATH);
 
-        // Apply styles based on the selected background
-        switch (randomBackground) {
-            case 1:
+        if (settingsFile.exists()) {
+            try (Scanner scanner = new Scanner(settingsFile)) {
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    if (line.contains("Background")) {
+                        return line.split(":")[1].trim();
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return "Fire"; 
+    }
+
+    private void selectBackground(BorderPane root) {
+        String selectedBackground = readSelectedBackgroundFromSettings();
+        
+        switch (selectedBackground) {
+            case "Fire":
                 FireBackground fireBackground = new FireBackground();
                 root.getChildren().add(0, fireBackground);
                 root.setStyle("-fx-background-color: #2c3e50;");
                 root.getStylesheets().add(getClass().getResource("/Styles/fire.css").toExternalForm());
                 break;
-            case 2:
+    
+            case "Water":
                 WaterBackground waterBackground = new WaterBackground();
                 root.getChildren().add(0, waterBackground);
                 root.setStyle("-fx-background-color: #3498db;");
                 root.getStylesheets().add(getClass().getResource("/Styles/water.css").toExternalForm());
                 break;
-            case 3:
+    
+            case "Earth":
                 root.setStyle("-fx-background-color: #8B4513;");
                 root.getStylesheets().add(getClass().getResource("/Styles/earth.css").toExternalForm());
                 break;
-            case 4:
+    
+            case "Air":
                 AirBackground airBackground = new AirBackground();
                 root.getChildren().add(0, airBackground);
                 root.setStyle("-fx-background-color: #87CEEB;"); 
                 root.getStylesheets().add(getClass().getResource("/Styles/air.css").toExternalForm());
                 break;
+    
             default:
                 break;
         }

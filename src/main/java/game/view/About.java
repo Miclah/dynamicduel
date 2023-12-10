@@ -13,15 +13,15 @@ import javafx.stage.Stage;
 
 public class About {
 
-    public static final String VERSION = "0.0.1";
-    public static final String AUTHOR = "Your Name";
+    public static final String VERSION = "0.1";
+    public static final String AUTHOR = "Michal Petrán";
 
     public static void displayAbout(Stage primaryStage) {
-        primaryStage.setTitle("About Dynamic Duel");
+        primaryStage.setTitle("Dynamic Duel");
 
-        // Create text content for the About page
+        // Placeholder text
         Text aboutText = new Text();
-        aboutText.setText("Card Game Concept: \"Dynamic Duel\"\n\n" +
+        aboutText.setText("\"Dynamic Duel\"\n\n" +
                 "Game Overview:\n" +
                 "\"Dynamic Duel\" is a 2D card game where players aim to deplete their opponent's health by playing various cards with unique abilities.\n\n" +
                 "Game Elements:\n" +
@@ -39,47 +39,36 @@ public class About {
                 "**Author:** " + AUTHOR + "\n" +
                 "**Version:** " + VERSION);
 
-        aboutText.setWrappingWidth(725); // Set the maximum width for text wrapping
+        aboutText.setWrappingWidth(725);
         aboutText.setStyle("-fx-fill: #fff; -fx-font-size: 18; -fx-padding: 20; -fx-text-alignment: justify;");
         
         ScrollPane scrollPane = new ScrollPane(aboutText);
-        scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER); // Disable horizontal scrollbar
-        scrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED); // Enable vertical scrollbar
+        scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED); 
         scrollPane.setStyle("-fx-background: #2c3e50; -fx-background-color: #2c3e50;");
 
-        
-
-        // Create a Back button
         Button backButton = new Button("Back");
         backButton.getStyleClass().add("button");
         backButton.setOnAction(e -> {
-            // Implement logic to go back to the Settings menu
-            Settings.displaySettings(primaryStage);
+            Options.displayOptions(primaryStage);
         });
 
-        // Creating a VBox (vertical box) to hold the text and button
         VBox vbox = new VBox(20);
-        vbox.setAlignment(Pos.TOP_CENTER); // Align to the top center
-        vbox.setPadding(new Insets(20)); // Add padding to the VBox
+        vbox.setAlignment(Pos.TOP_CENTER);
+        vbox.setPadding(new Insets(20)); 
         vbox.getChildren().addAll(scrollPane, backButton);
 
-        // Creating a BorderPane to organize the layout
         BorderPane root = new BorderPane();
         root.setCenter(vbox);
 
-        // Apply background color
         root.setStyle("-fx-background-color: #2c3e50;");
 
-        // Creating the scene
         Scene scene = new Scene(root, 800, 600);
 
-        // Set the stylesheet for the scene
         scene.getStylesheets().add(About.class.getResource("/Styles/Menu/about.css").toExternalForm());
 
-        // Setting the scene
         primaryStage.setScene(scene);
 
-        // Displaying the stage
         primaryStage.show();
     }
 }
