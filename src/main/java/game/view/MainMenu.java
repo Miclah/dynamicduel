@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
+import game.util.MusicPlayer;
 import game.view.Backgrounds.AirBackground;
 import game.view.Backgrounds.FireBackground;
 import game.view.Backgrounds.WaterBackground;
@@ -58,12 +59,22 @@ public class MainMenu extends Application {
 
         primaryStage.setResizable(false);
 
-        primaryStage.show();
+        MusicPlayer.playMainMenuMusic();
 
+        primaryStage.setOnHidden(e -> {
+            MusicPlayer.resetIsMusicPlaying(); // Reset isMusicPlaying when returning to MainMenu
+        });
+
+        primaryStage.setOnCloseRequest(e -> {
+        MusicPlayer.stopMusic();
+        primaryStage.close();
+        });
+
+        primaryStage.show();
         
     }
 
-    private String readSelectedBackgroundFromSettings() {
+    private String readBackground() {
         File settingsFile = new File(Settings.SETTINGS_FILE_PATH);
 
         if (settingsFile.exists()) {
@@ -83,32 +94,28 @@ public class MainMenu extends Application {
     }
 
     private void selectBackground(BorderPane root) {
-        String selectedBackground = readSelectedBackgroundFromSettings();
+        String selectedBackground = readBackground();
         
         switch (selectedBackground) {
             case "Fire":
                 FireBackground fireBackground = new FireBackground();
                 root.getChildren().add(0, fireBackground);
-                root.setStyle("-fx-background-color: #2c3e50;");
                 root.getStylesheets().add(getClass().getResource("/Styles/fire.css").toExternalForm());
                 break;
     
             case "Water":
                 WaterBackground waterBackground = new WaterBackground();
                 root.getChildren().add(0, waterBackground);
-                root.setStyle("-fx-background-color: #3498db;");
                 root.getStylesheets().add(getClass().getResource("/Styles/water.css").toExternalForm());
                 break;
     
             case "Earth":
-                root.setStyle("-fx-background-color: #8B4513;");
                 root.getStylesheets().add(getClass().getResource("/Styles/earth.css").toExternalForm());
                 break;
     
             case "Air":
                 AirBackground airBackground = new AirBackground();
                 root.getChildren().add(0, airBackground);
-                root.setStyle("-fx-background-color: #87CEEB;"); 
                 root.getStylesheets().add(getClass().getResource("/Styles/air.css").toExternalForm());
                 break;
     

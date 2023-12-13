@@ -1,4 +1,8 @@
 /* water.css */
+.root {
+    -fx-background-color: #3498db; /* Background color */
+}
+
 .button {
     -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     -fx-font-size: 24;

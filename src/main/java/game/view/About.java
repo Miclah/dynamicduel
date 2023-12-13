@@ -61,8 +61,6 @@ public class About {
         BorderPane root = new BorderPane();
         root.setCenter(vbox);
 
-        root.setStyle("-fx-background-color: #2c3e50;");
-
         Scene scene = new Scene(root, 800, 600);
 
         scene.getStylesheets().add(About.class.getResource("/Styles/Menu/about.css").toExternalForm());

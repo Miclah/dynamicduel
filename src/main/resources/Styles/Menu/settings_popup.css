@@ -1,0 +1,56 @@
+/* settings_popup.css */
+.root {
+    -fx-background-color: #3498db; /* Background color */
+}
+
+.label {
+    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -fx-font-size: 18;
+    -fx-font-weight: bold; /* Make the text bold */
+    -fx-text-fill: #fff; /* Text color */
+}
+
+.header-panel {
+    -fx-background-color: #3498db; /* Background color for the header panel */
+}
+
+.button {
+    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-background-color: #2c3e50; /* Button background color */
+    -fx-border-width: 2px;
+    -fx-border-color: #1f2c38; /* Border color */
+    -fx-text-fill: #fff; /* Text color */
+    -fx-padding: 10 20;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #475a6b; /* Darker background color on hover */
+    -fx-border-color: #1f2c38; /* Border color on hover */
+}
+
+.button:pressed {
+    -fx-background-color: #1a2633; /* Even darker background color when pressed */
+}
+
+.button:disabled {
+    -fx-opacity: 0.7;
+}
+
+.button:focus {
+    -fx-border-color: #e74c3c; /* Border color when focused */
+    -fx-border-width: 3px;
+}
+
+.alert-dialog-pane {
+    -fx-background-color: #2c3e50; /* Overall background color for the dialog */
+}
+
+.alert-content {
+    -fx-alignment: center; /* Center-align the content */
+    -fx-spacing: 10; /* Add spacing between elements */
+}

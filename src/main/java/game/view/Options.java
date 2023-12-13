@@ -38,11 +38,9 @@ public class Options {
 
         root.setCenter(vbox);
         
-        root.getStylesheets().add(Options.class.getResource("/Styles/Menu/settings.css").toExternalForm());
+        root.getStylesheets().add(Options.class.getResource("/Styles/Menu/options.css").toExternalForm());
 
         Scene scene = new Scene(root, 800, 600);
-
-        root.setStyle("-fx-background-color: #2c3e50;");
 
         primaryStage.setScene(scene);
 
