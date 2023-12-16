@@ -6,6 +6,7 @@
 .label {
     -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     -fx-font-size: 18;
+    -fx-font-weight: bold; /* Make the label text bold */
     -fx-text-fill: #fff; /* Text color */
 }
 
@@ -17,7 +18,7 @@
     -fx-border-width: 2px;
     -fx-border-color: #2980b9; /* Border color */
     -fx-text-fill: #fff; /* Text color */
-    -fx-padding: 10 20;
+    -fx-padding: 15 25; /* Increase padding for buttons */
     -fx-border-radius: 8;
     -fx-background-radius: 8;
     -fx-cursor: hand;
@@ -43,16 +44,14 @@
 
 /* Additional styles for Slider and ComboBox */
 .slider {
-    -fx-padding: 10; /* Adjust the padding for the slider */
-    -fx-min-width: 120; /* Set the minimum width for the slider */
-    -fx-max-width: 180; /* Set the maximum width for the slider */
-    -fx-background-color: #34495e; /* Slider background color */
-    -fx-border-width: 2px;
-    -fx-border-color: transparent; /* Remove the border color */
+    -fx-padding: 15; /* Adjust the padding for the slider */
+    -fx-min-width: 200; /* Set the minimum width for the slider */
+    -fx-max-width: 300; /* Set the maximum width for the slider */
+    -fx-background-color: #2c3e50; /* Slider background color */
 }
 
 .slider .track {
-    -fx-background-color: #2c3e50; /* Track color */
+    -fx-background-color: #ffffff; /* Track color */
 }
 
 .slider .thumb {
@@ -65,18 +64,51 @@
 }
 
 .combo-box {
-    -fx-padding: 5; /* Adjust the padding for the combo box */
-    -fx-background-color: #34495e; /* Combo box background color */
-    -fx-border-width: 2px;
-    -fx-border-color: transparent; /* Remove the border color */
-    -fx-border-radius: 8;
+    -fx-padding: 10; /* Adjust the padding for the combo box */
+    -fx-background-color: #ffffff; /* Combo box background color */
+    -fx-border-width: 3px; /* Increase border width for combo box */
+    -fx-border-color: #3498db; /* Border color */
+    -fx-border-radius: 10; /* Increase border radius for combo box */
+    -fx-font-weight: bold; 
 }
 
 .combo-box-popup > .list-view .list-cell {
-    -fx-background-color: #34495e; /* Background color for each item in the dropdown */
+    -fx-background-color: #ffffff; /* Background color for each item in the dropdown */
+    -fx-border-color: #2c3e50; /* Border color for each item in the dropdown */
+    -fx-border-width: 1px;
+    -fx-background-radius: 0; /* Remove the background radius */
 }
 
 .combo-box-popup > .list-view .list-cell .text {
-    -fx-text-fill: #fff; /* Text color for each item in the dropdown */
-    -fx-padding: 5; /* Adjust the padding for the text in the dropdown */
+    -fx-text-fill: #3498db; /* Text color for each item in the dropdown */
+    -fx-padding: 8; /* Adjust the padding for the text in the dropdown */
+    -fx-font-weight: bold; /* Make the text in the dropdown bold */
+    -fx-text-align: center; 
+}
+
+.combo-box-popup > .list-view .list-cell:filled:selected {
+    -fx-background-color: #3498db; /* Background color for selected item in the dropdown */
+    -fx-background-radius: 0; /* Remove the background radius */
+}
+.combo-box-popup > .list-view .list-cell:hover {
+    -fx-background-color: transparent; /* Remove hover effect entirely */
+}
+
+.combo-box-popup > .list-view .list-cell:filled:selected .text {
+    -fx-text-fill: #ffffff; /* Text color for selected item in the dropdown */
+}
+
+.combo-box-popup > .list-view .list-cell:filled:selected:hover {
+    -fx-background-color: #47acb5; /* Background color for selected item in the dropdown on hover */
+}
+
+
+
+/* Settings text styles */
+.settings-text {
+    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -fx-font-size: 24; /* Increase font size for settings text */
+    -fx-font-weight: bold; /* Make the settings text bold */
+    -fx-text-fill: #fff; /* Text color for settings text */
+    -fx-padding: 10 0; /* Adjust padding for settings text */
 }

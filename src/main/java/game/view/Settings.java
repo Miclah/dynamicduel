@@ -21,18 +21,19 @@ import game.util.MusicPlayer;
 
 public class Settings {
 
-    public static final String SETTINGS_FILE_PATH = "src/main/resources/Settings/settings.ini";
+    private static final String SETTINGS_FILE_PATH = "src/main/resources/Settings/settings.ini";
     
     private static String currentBackground;
     private static int currentMusicVolume;
     
     private static String selectedBackground;
-    public static int musicVolume;
+    private static int musicVolume;
 
     private static Slider musicSlider;
+   
 
     public static void displaySettings(Stage primaryStage) {
-        primaryStage.setTitle("Settings");
+        primaryStage.setTitle("Dynamic Duel - Settings");
 
         ComboBox<String> backgroundComboBox = new ComboBox<>();
         backgroundComboBox.getItems().addAll("Fire", "Water", "Earth", "Air");
@@ -49,7 +50,6 @@ public class Settings {
             if (changesConfirmed) {
                 saveSettings(backgroundComboBox.getValue(), (int) musicSlider.getValue());
                 loadSettings(backgroundComboBox, musicSlider);
-                MusicPlayer.setMusicVolume();
                 Options.displayOptions(primaryStage);
             }
         });
@@ -67,7 +67,7 @@ public class Settings {
         primaryStage.show();
     }
 
-    private static void loadSettings(ComboBox<String> backgroundComboBox, Slider musicSlider) {
+    public static void loadSettings(ComboBox<String> backgroundComboBox, Slider musicSlider) {
         File settingsFile = new File(SETTINGS_FILE_PATH);
 
         if (settingsFile.exists()) {
@@ -79,13 +79,10 @@ public class Settings {
                         if (line.contains("Background")) {
                             selectedBackground = line.split(":")[1].trim();
                             backgroundComboBox.setValue(selectedBackground);
-                            // Update current background
                             currentBackground = selectedBackground;
                         } else if (line.contains("Music")) {
                             musicVolume = Integer.parseInt(line.split(":")[1].trim());
                             musicSlider.setValue(musicVolume);
-                            System.out.println("Loaded music volume: " + musicVolume);
-                            // Update current music volume
                             currentMusicVolume = musicVolume;
                         }
                     }
@@ -97,6 +94,7 @@ public class Settings {
             backgroundComboBox.setValue("Fire");
             musicSlider.setValue(100);
         }
+        MusicPlayer.setMusicVolume();
     }
 
     private static void saveSettings(String selectedBackground, int musicVolume) {
@@ -131,6 +129,33 @@ public class Settings {
             return true;
         }
     }
+
+    public static void setMusicVolumeFromFile() {
+        File settingsFile = new File(SETTINGS_FILE_PATH);
+
+        if (settingsFile.exists()) {
+            try (Scanner scanner = new Scanner(settingsFile)) {
+                if (scanner.hasNextLine()) {
+                    scanner.nextLine();
+                    while (scanner.hasNextLine()) {
+                        String line = scanner.nextLine();
+                        if (line.contains("Music")) {
+                            musicVolume = Integer.parseInt(line.split(":")[1].trim());
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     
+    public static int getMusicVolume() {
+        return musicVolume;
+    }
+
+    public static String getFilePath() {
+        return SETTINGS_FILE_PATH;
+    }
 }
 

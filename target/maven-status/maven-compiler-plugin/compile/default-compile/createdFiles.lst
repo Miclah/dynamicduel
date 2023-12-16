@@ -9,6 +9,7 @@ game\view\Backgrounds\FireBackground.class
 game\util\MusicPlayer.class
 game\Main.class
 game\view\Options.class
+game\util\PersistentStorage.class
 game\view\GameView.class
 game\view\CardView.class
 game\view\Settings.class

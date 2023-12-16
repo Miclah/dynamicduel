@@ -3,6 +3,7 @@ package game.view;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -13,11 +14,14 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import game.util.MusicPlayer;
+import game.util.PersistentStorage;
 import game.view.Backgrounds.AirBackground;
 import game.view.Backgrounds.FireBackground;
 import game.view.Backgrounds.WaterBackground;
 
 public class MainMenu extends Application {
+
+    private static final String POPUP_SHOWN_KEY = "popupShown";
 
     public static void main(String[] args) {
         launch(args);
@@ -26,6 +30,11 @@ public class MainMenu extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Dynamic Duel");
+
+        if (!PersistentStorage.getBoolean(POPUP_SHOWN_KEY, false)) {
+            musicPopUp(primaryStage);
+            PersistentStorage.setBoolean(POPUP_SHOWN_KEY, true);
+        }
 
         Button startButton = new Button("Start");
         Button optionsButton = new Button("Options");
@@ -75,7 +84,7 @@ public class MainMenu extends Application {
     }
 
     private String readBackground() {
-        File settingsFile = new File(Settings.SETTINGS_FILE_PATH);
+        File settingsFile = new File(Settings.getFilePath());
 
         if (settingsFile.exists()) {
             try (Scanner scanner = new Scanner(settingsFile)) {
@@ -122,5 +131,15 @@ public class MainMenu extends Application {
             default:
                 break;
         }
+    }
+
+    private void musicPopUp(Stage primaryStage) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Volume Warning");
+        alert.setHeaderText("Warning: Game Contains Music");
+        alert.setContentText("Please adjust your volume if it's too high.");
+        alert.getDialogPane().getStylesheets().add(getClass().getResource("/Styles/Menu/volume_popup.css").toExternalForm());
+        alert.setGraphic(null);
+        alert.showAndWait();
     }
 }

@@ -13,11 +13,11 @@ import javafx.stage.Stage;
 
 public class About {
 
-    public static final String VERSION = "0.1";
-    public static final String AUTHOR = "Michal Petrán";
+    private static final String VERSION = "0.1";
+    private static final String AUTHOR = "Michal Petrán";
 
     public static void displayAbout(Stage primaryStage) {
-        primaryStage.setTitle("Dynamic Duel");
+        primaryStage.setTitle("Dynamic Duel - About");
 
         // Placeholder text
         Text aboutText = new Text();

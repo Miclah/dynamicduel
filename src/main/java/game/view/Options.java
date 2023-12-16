@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class Options {
 
     public static void displayOptions(Stage primaryStage) {
-        primaryStage.setTitle("Dynamic Duel");
+        primaryStage.setTitle("Dynamic Duel - Options");
 
         Button statsButton = new Button("Player Stats");
         Button settingsButton = new Button("Settings");
