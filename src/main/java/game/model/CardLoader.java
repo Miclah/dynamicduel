@@ -1,32 +1,29 @@
 package game.model;
 
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 import java.util.List;
 
-//todo: 
-//fix the loading of cards
 public class CardLoader {
 
-    public static List<Card> loadFireCards() {
-        return loadCards("fire", new int[]{10, 20, 30, 40, 50});
-    }
-
-    public static List<Card> loadWaterCards() {
-        return loadCards("water", new int[]{15, 25});
-    }
-
-    public static List<Card> loadEarthCards() {
-        return loadCards("earth", new int[]{15, 20, 25});
-    }
-
-    private static List<Card> loadCards(String category, int[] values) {
+    public static List<Card> loadCards() {
         List<Card> cards = new ArrayList<>();
 
-        for (int value : values) {
-            String imagePath = String.format("/Cards/card_textures/%s/%d_%s.png", category, value, category);
-            String enumName = String.format("%s_%d", category.toUpperCase(), value);
-            CardType cardType = CardType.valueOf(enumName);
-            cards.add(new Card(cardType, imagePath));
+        for (CardType cardType : CardType.values()) {
+            try {
+                String imageName = String.valueOf(cardType.getValue()).toLowerCase() + "_" + cardType.getElementType().name().toLowerCase() + ".png";
+                String imagePath = "/Cards/card_textures/" + cardType.getElementType().name().toLowerCase() + "/" + imageName;
+                Image frontImage = new Image(CardLoader.class.getResourceAsStream(imagePath));
+                Image backImage = new Image(CardLoader.class.getResourceAsStream("/Cards/card_textures/card_back.png"));
+
+
+                Card card = new Card(cardType, frontImage, backImage);
+                cards.add(card);
+            } catch (NullPointerException e) {
+                System.err.println("Error loading image for card: " + cardType.name());
+                e.printStackTrace();
+            }
         }
 
         return cards;

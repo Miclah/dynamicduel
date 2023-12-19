@@ -1,29 +1,27 @@
 package game.model;
 
+import javafx.scene.image.Image;
+
 public class Card {
-    private CardType type;
-    private String imagePath;
-    private boolean isFaceUp;
+    private final CardType cardType;
+    private final Image frontImage;
+    private final Image backImage;
 
-    public Card(CardType type, String imagePath) {
-        this.type = type;
-        this.imagePath = imagePath;
-        this.isFaceUp = false;
+    public Card(CardType cardType, Image frontImage, Image backImage) {
+        this.cardType = cardType;
+        this.frontImage = frontImage;
+        this.backImage = backImage;
     }
 
-    public CardType getType() {
-        return this.type;
+    public CardType getCardType() {
+        return cardType;
     }
 
-    public String getImagePath() {
-        return this.imagePath;
+    public Image getFrontImage() {
+        return frontImage;
     }
 
-    public boolean isFaceUp() {
-        return this.isFaceUp;
-    }
-
-    public void flip() {
-        this.isFaceUp = !this.isFaceUp;
+    public Image getBackImage() {
+        return backImage;
     }
 }

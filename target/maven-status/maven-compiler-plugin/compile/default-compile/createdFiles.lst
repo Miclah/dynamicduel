@@ -1,4 +1,5 @@
 game\model\Card.class
+game\model\ElementType.class
 game\view\Backgrounds\WaterBackground.class
 game\model\CardType.class
 game\view\About.class
@@ -11,6 +12,5 @@ game\Main.class
 game\view\Options.class
 game\util\PersistentStorage.class
 game\view\GameView.class
-game\view\CardView.class
 game\view\Settings.class
 game\view\Backgrounds\AirBackground.class
