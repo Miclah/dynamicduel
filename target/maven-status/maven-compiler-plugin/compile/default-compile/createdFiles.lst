@@ -1,6 +1,7 @@
 game\model\Card.class
 game\model\ElementType.class
 game\view\Backgrounds\WaterBackground.class
+game\controller\CardController.class
 game\model\CardType.class
 game\view\About.class
 game\view\MainMenu.class

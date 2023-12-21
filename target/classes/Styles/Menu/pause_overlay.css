@@ -1,0 +1,38 @@
+/* pause_overlay.css */
+.v-box {
+    -fx-spacing: 20;
+}
+
+.button {
+    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-background-color: #3498db;
+    -fx-border-width: 2px;
+    -fx-border-color: #2980b9;
+    -fx-text-fill: #fff;
+    -fx-padding: 15 25;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+    -fx-transition-duration: 0.3s;
+}
+
+.button:hover {
+    -fx-background-color: #47acb5; /* Darker background color on hover */
+    -fx-border-color: #2c3e50; /* Border color on hover */
+}
+
+.button:pressed {
+    -fx-background-color: #1f618d; /* Even darker background color when pressed */
+}
+
+.button:disabled {
+    -fx-opacity: 0.7;
+}
+
+.button:focus {
+    -fx-border-color: #e74c3c; /* Border color when focused */
+    -fx-border-width: 3px;
+}

@@ -5,6 +5,7 @@ D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\mode
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\Main.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\Options.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\Settings.java
+D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\controller\CardController.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\util\PersistentStorage.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\components\PlayerDeck.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\model\ElementType.java
@@ -12,7 +13,6 @@ D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\model\CardLoader.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\Backgrounds\FireBackground.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\module-info.java
-D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\CardView.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\model\Card.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\util\MusicPlayer.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\GameView.java

@@ -5,7 +5,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -25,18 +24,16 @@ public class Settings {
 
     private static String currentBackground;
     private static int currentMusicVolume;
-    private static boolean currentFullscreenState;
 
     private static String selectedBackground;
     private static int musicVolume;
 
     private static Slider musicSlider;
-    private static CheckBox fullscreenCheckbox;
+
 
     public static void displaySettings(Stage primaryStage) {
         primaryStage.setTitle("Dynamic Duel - Settings");
 
-        fullscreenCheckbox = new CheckBox("Fullscreen");
         ComboBox<String> backgroundComboBox = new ComboBox<>();
         backgroundComboBox.getItems().addAll("Fire", "Water", "Earth", "Air");
 
@@ -50,7 +47,7 @@ public class Settings {
         backButton.setOnAction(e -> {
             boolean changesConfirmed = showPopUp(primaryStage, backgroundComboBox);
             if (changesConfirmed) {
-                saveSettings(backgroundComboBox.getValue(), (int) musicSlider.getValue(), fullscreenCheckbox.isSelected());
+                saveSettings(backgroundComboBox.getValue(), (int) musicSlider.getValue());
                 loadSettings(backgroundComboBox, musicSlider);
                 Options.displayOptions(primaryStage);
             }
@@ -58,7 +55,7 @@ public class Settings {
 
         VBox vbox = new VBox(20);
         vbox.setAlignment(Pos.CENTER);
-        vbox.getChildren().addAll(fullscreenCheckbox, backgroundLabel, backgroundComboBox, musicLabel, musicSlider, backButton);
+        vbox.getChildren().addAll(backgroundLabel, backgroundComboBox, musicLabel, musicSlider, backButton);
 
         BorderPane root = new BorderPane();
         root.setCenter(vbox);
@@ -86,9 +83,6 @@ public class Settings {
                             musicVolume = Integer.parseInt(line.split(":")[1].trim());
                             musicSlider.setValue(musicVolume);
                             currentMusicVolume = musicVolume;
-                        } else if (line.contains("Fullscreen")) {
-                            currentFullscreenState = Boolean.parseBoolean(line.split(":")[1].trim());
-                            fullscreenCheckbox.setSelected(currentFullscreenState);
                         }
                     }
                 }
@@ -98,17 +92,16 @@ public class Settings {
         } else {
             backgroundComboBox.setValue("Fire");
             musicSlider.setValue(100);
-            fullscreenCheckbox.setSelected(false);
         }
         MusicPlayer.setMusicVolume();
     }
 
-    private static void saveSettings(String selectedBackground, int musicVolume, boolean fullscreenState) {
+    private static void saveSettings(String selectedBackground, int musicVolume) {
         try {
             File file = new File(SETTINGS_FILE_PATH);
             file.getParentFile().mkdirs();
             FileWriter writer = new FileWriter(file);
-            writer.write("[Settings]\nBackground : " + selectedBackground + "\nMusic : " + musicVolume + "\nFullscreen : " + fullscreenState + "\n");
+            writer.write("[Settings]\nBackground : " + selectedBackground + "\nMusic : " + musicVolume);
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -118,7 +111,7 @@ public class Settings {
     private static boolean showPopUp(Stage primaryStage, ComboBox<String> backgroundComboBox) {
         // Check if any changes are made
 
-        boolean isChanged = (!backgroundComboBox.getValue().equals(currentBackground) || (int) musicSlider.getValue() != currentMusicVolume || fullscreenCheckbox.isSelected() != currentFullscreenState);
+        boolean isChanged = (!backgroundComboBox.getValue().equals(currentBackground) || (int) musicSlider.getValue() != currentMusicVolume);
 
         if (isChanged) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -136,7 +129,7 @@ public class Settings {
         }
     }
 
-    public static void setMusicVolumeFromFile() {
+    public static void readSettings() {
         File settingsFile = new File(SETTINGS_FILE_PATH);
 
         if (settingsFile.exists()) {
@@ -155,16 +148,13 @@ public class Settings {
             }
         }
     }
-
-    public static int getMusicVolume() {
-        return musicVolume;
-    }
-
+    
     public static String getFilePath() {
         return SETTINGS_FILE_PATH;
     }
 
-    public static boolean loadFullscreenSetting() {
-        return currentFullscreenState;
+    public static int getMusicVolume() {
+        readSettings();
+        return musicVolume;
     }
 }

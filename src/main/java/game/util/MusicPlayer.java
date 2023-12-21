@@ -33,7 +33,6 @@ public class MusicPlayer {
     
                 mediaPlayer.setOnReady(() -> {
                     isMusicPlaying = true;
-                    Settings.setMusicVolumeFromFile();
                     setMusicVolume();
                     mediaPlayer.play();
                 });
@@ -58,10 +57,6 @@ public class MusicPlayer {
         // Check if the pop-up has already been shown
         if (!isPopupShown) {
             isPopupShown = true;
-    
-            // Optionally, provide fallback behavior or notify the user
-            System.err.println("Error loading music.");
-    
             // For example, you can display an alert to the user:
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -86,7 +81,7 @@ public class MusicPlayer {
     public static void setMusicVolume() {
         if (mediaPlayer != null) {
             int musicVolume = Settings.getMusicVolume();
-            mediaPlayer.setVolume(musicVolume / 100.0);
+            mediaPlayer.setVolume(musicVolume / 300.0);
         }
     }
 

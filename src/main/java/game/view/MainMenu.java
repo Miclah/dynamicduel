@@ -1,5 +1,6 @@
 package game.view;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +24,7 @@ import game.view.Backgrounds.WaterBackground;
 public class MainMenu extends Application {
 
     private static final String POPUP_SHOWN_KEY = "popupShown";
+    private static boolean hasFadeInPlayed = false;
 
     public static void main(String[] args) {
         launch(args);
@@ -41,6 +44,7 @@ public class MainMenu extends Application {
         Button exitButton = new Button("Exit");
         
         startButton.setOnAction(e -> {
+            MusicPlayer.stopMusic();
             Stage gameStage = new Stage();
             GameView.displayGame(gameStage);
             primaryStage.hide(); 
@@ -64,6 +68,14 @@ public class MainMenu extends Application {
 
         Scene scene = new Scene(root, 800, 600);
         
+        if (!hasFadeInPlayed) {
+            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), root);
+            fadeTransition.setFromValue(0.25); // Start from the darker shade
+            fadeTransition.setToValue(1);
+            fadeTransition.play();
+    
+            hasFadeInPlayed = true; // Set the flag to true after playing once
+        }
         primaryStage.setScene(scene);
 
         primaryStage.setResizable(false);
@@ -109,23 +121,23 @@ public class MainMenu extends Application {
             case "Fire":
                 FireBackground fireBackground = new FireBackground();
                 root.getChildren().add(0, fireBackground);
-                root.getStylesheets().add(getClass().getResource("/Styles/fire.css").toExternalForm());
+                root.getStylesheets().add(getClass().getResource("/Styles/Background/fire.css").toExternalForm());
                 break;
     
             case "Water":
                 WaterBackground waterBackground = new WaterBackground();
                 root.getChildren().add(0, waterBackground);
-                root.getStylesheets().add(getClass().getResource("/Styles/water.css").toExternalForm());
+                root.getStylesheets().add(getClass().getResource("/Styles/Background/water.css").toExternalForm());
                 break;
     
             case "Earth":
-                root.getStylesheets().add(getClass().getResource("/Styles/earth.css").toExternalForm());
+                root.getStylesheets().add(getClass().getResource("/Styles/Background/earth.css").toExternalForm());
                 break;
     
             case "Air":
                 AirBackground airBackground = new AirBackground();
                 root.getChildren().add(0, airBackground);
-                root.getStylesheets().add(getClass().getResource("/Styles/air.css").toExternalForm());
+                root.getStylesheets().add(getClass().getResource("/Styles/Background/air.css").toExternalForm());
                 break;
     
             default:
