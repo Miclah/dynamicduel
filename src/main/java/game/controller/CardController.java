@@ -1,7 +1,9 @@
 package game.controller;
 
 import game.model.Card;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 public class CardController {
@@ -11,38 +13,48 @@ public class CardController {
         ImageView cardImageView = new ImageView(card.getFrontImage());
         cardImageView.setPreserveRatio(true);
 
-        // Calculate the original aspect ratio of the card image
         double originalWidth = card.getFrontImage().getWidth();
         double originalHeight = card.getFrontImage().getHeight();
         double aspectRatio = originalWidth / originalHeight;
-
-        // Calculate the initial width based on the original aspect ratio and screen height
         double initialWidth = screenHeight / 4.0 * aspectRatio;
         cardImageView.setFitWidth(initialWidth);
 
         cardImageView.setUserData(card);
 
-        // Set up event handlers for drag-and-drop
         cardImageView.setOnMousePressed(this::handleMousePressed);
         cardImageView.setOnMouseDragged(this::handleMouseDragged);
+        cardImageView.setOnMouseReleased(this::handleMouseReleased);
 
         return cardImageView;
     }
 
     private void handleMousePressed(MouseEvent event) {
-        xOffset = event.getSceneX();
-        yOffset = event.getSceneY();
+        if (event.getButton() == MouseButton.PRIMARY) {
+            ImageView cardImageView = (ImageView) event.getSource();
+            xOffset = event.getSceneX() - cardImageView.getTranslateX();
+            yOffset = event.getSceneY() - cardImageView.getTranslateY();
+
+            cardImageView.setEffect(new DropShadow());
+
+        } else if (event.getButton() == MouseButton.SECONDARY) {
+            System.out.println("Right mouse button clicked");
+        }
     }
 
     private void handleMouseDragged(MouseEvent event) {
-        ImageView cardImageView = (ImageView) event.getSource();
-        double deltaX = event.getSceneX() - xOffset;
-        double deltaY = event.getSceneY() - yOffset;
+        if (event.getButton() == MouseButton.PRIMARY) {
+            ImageView cardImageView = (ImageView) event.getSource();
+            double deltaX = event.getSceneX() - xOffset;
+            double deltaY = event.getSceneY() - yOffset;
 
-        cardImageView.setTranslateX(cardImageView.getTranslateX() + deltaX);
-        cardImageView.setTranslateY(cardImageView.getTranslateY() + deltaY);
+            cardImageView.setTranslateX(deltaX);
+            cardImageView.setTranslateY(deltaY);
+        }
+    }
 
-        xOffset = event.getSceneX();
-        yOffset = event.getSceneY();
+    private void handleMouseReleased(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY) {
+            ((ImageView) event.getSource()).setEffect(null);
+        }
     }
 }

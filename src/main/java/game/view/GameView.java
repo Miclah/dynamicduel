@@ -2,35 +2,41 @@ package game.view;
 
 import game.controller.CardController;
 import game.model.CardLoader;
+import game.view.components.OpponentDeck;
+import game.view.components.OpponentSpecial;
+import game.view.components.PlayerDeck;
+import game.view.components.PlayerSpecial;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class GameView {
 
-    private static final double INITIAL_WIDTH = 1920;
-    private static final double INITIAL_HEIGHT = 1080;
+    private static final double WINDOW_WIDTH = 1920;
+    private static final double WINDOW_HEIGHT = 1080;
 
     public static void displayGame(Stage primaryStage) {
         primaryStage.setTitle("Dynamic Duel");
 
-        StackPane root = new StackPane();
+        BorderPane root = new BorderPane();
 
-        Scene scene = new Scene(root, INITIAL_WIDTH, INITIAL_HEIGHT);
+        Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
 
         CardController cardController = new CardController();
         var cards = CardLoader.loadCards();
-        var card1ImageView = cardController.createCardImageView(cards.get(0), INITIAL_HEIGHT);
-        var card2ImageView = cardController.createCardImageView(cards.get(1), INITIAL_HEIGHT);
+        var card1ImageView = cardController.createCardImageView(cards.get(0), WINDOW_HEIGHT);
+        var card2ImageView = cardController.createCardImageView(cards.get(1), WINDOW_HEIGHT);
 
-        card1ImageView.setTranslateX(INITIAL_WIDTH / 4);
-        card1ImageView.setTranslateY(INITIAL_HEIGHT / 4);
-        card2ImageView.setTranslateX(INITIAL_WIDTH / 2);
-        card2ImageView.setTranslateY(INITIAL_HEIGHT / 4);
+        card1ImageView.setTranslateX(WINDOW_WIDTH / 4);
+        card1ImageView.setTranslateY(WINDOW_HEIGHT / 4);
+        card2ImageView.setTranslateX(WINDOW_WIDTH / 2);
+        card2ImageView.setTranslateY(WINDOW_HEIGHT / 4);
 
         root.getChildren().addAll(card1ImageView, card2ImageView);
 
@@ -51,7 +57,7 @@ public class GameView {
         pauseMenu.setAlignment(Pos.CENTER);
 
         pauseOverlay.getChildren().add(pauseMenu);
-        root.getChildren().add(pauseOverlay);
+        root.setCenter(pauseOverlay);
         pauseOverlay.setVisible(false);
 
         pauseOverlay.setStyle("-fx-background-color: rgba(0, 0, 0, 0.75); -fx-alignment: center;");
@@ -59,14 +65,27 @@ public class GameView {
         scene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ESCAPE) {
                 pauseOverlay.setVisible(!pauseOverlay.isVisible());
+                pauseOverlay.toFront();
                 pauseOverlay.getStylesheets().add(GameView.class.getResource("/Styles/Menu/pause_overlay.css").toExternalForm());
             }
         });
 
-        // Disable resizing
-        primaryStage.setResizable(false);
+        PlayerDeck playerDeckArea = new PlayerDeck(1600, 320, WINDOW_WIDTH, WINDOW_HEIGHT, Color.ORANGE);
+        PlayerSpecial playerSpecialArea = new PlayerSpecial(WINDOW_HEIGHT - 760, WINDOW_WIDTH, WINDOW_HEIGHT, Color.GREEN);
+        OpponentDeck opponentDeckArea = new OpponentDeck(1600, 320, WINDOW_WIDTH, WINDOW_HEIGHT, Color.ORANGE);
+        OpponentSpecial opponentSpecialArea = new OpponentSpecial(WINDOW_HEIGHT - 760, WINDOW_WIDTH, WINDOW_HEIGHT, Color.GREEN);
+        root.getChildren().addAll(playerDeckArea, playerSpecialArea, opponentDeckArea, opponentSpecialArea);
 
+        primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    public static double getWindowWidth() {
+        return WINDOW_WIDTH;
+    }
+
+    public static double getWindowHeight() {
+        return WINDOW_HEIGHT;
     }
 }
