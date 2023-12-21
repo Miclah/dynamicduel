@@ -2,6 +2,8 @@ D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\MainMenu.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\Backgrounds\AirBackground.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\components\PlayerSpecial.java
+D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\components\StackedDeck.java
+D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\components\DrawDeck.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\model\CardType.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\Main.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\Options.java

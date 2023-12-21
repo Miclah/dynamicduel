@@ -1,7 +1,6 @@
 package game.view;
 
-import game.controller.CardController;
-import game.model.CardLoader;
+import game.view.components.DrawDeck;
 import game.view.components.OpponentDeck;
 import game.view.components.OpponentSpecial;
 import game.view.components.PlayerDeck;
@@ -27,18 +26,6 @@ public class GameView {
         BorderPane root = new BorderPane();
 
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-
-        CardController cardController = new CardController();
-        var cards = CardLoader.loadCards();
-        var card1ImageView = cardController.createCardImageView(cards.get(0), WINDOW_HEIGHT);
-        var card2ImageView = cardController.createCardImageView(cards.get(1), WINDOW_HEIGHT);
-
-        card1ImageView.setTranslateX(WINDOW_WIDTH / 4);
-        card1ImageView.setTranslateY(WINDOW_HEIGHT / 4);
-        card2ImageView.setTranslateX(WINDOW_WIDTH / 2);
-        card2ImageView.setTranslateY(WINDOW_HEIGHT / 4);
-
-        root.getChildren().addAll(card1ImageView, card2ImageView);
 
         StackPane pauseOverlay = new StackPane();
 
@@ -74,7 +61,8 @@ public class GameView {
         PlayerSpecial playerSpecialArea = new PlayerSpecial(WINDOW_HEIGHT - 760, WINDOW_WIDTH, WINDOW_HEIGHT, Color.GREEN);
         OpponentDeck opponentDeckArea = new OpponentDeck(1600, 320, WINDOW_WIDTH, WINDOW_HEIGHT, Color.ORANGE);
         OpponentSpecial opponentSpecialArea = new OpponentSpecial(WINDOW_HEIGHT - 760, WINDOW_WIDTH, WINDOW_HEIGHT, Color.GREEN);
-        root.getChildren().addAll(playerDeckArea, playerSpecialArea, opponentDeckArea, opponentSpecialArea);
+        DrawDeck drawDeckArea = new DrawDeck(250, 440, WINDOW_WIDTH, WINDOW_HEIGHT, Color.BLUE);
+        root.getChildren().addAll(playerDeckArea, playerSpecialArea, opponentDeckArea, opponentSpecialArea, drawDeckArea);
 
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);

@@ -16,6 +16,8 @@ game\model\CardType.class
 module-info.class
 game\model\CardLoader.class
 game\view\Backgrounds\FireBackground.class
+game\view\components\StackedDeck.class
 game\view\Options.class
 game\view\GameView.class
+game\view\components\DrawDeck.class
 game\view\Settings.class
