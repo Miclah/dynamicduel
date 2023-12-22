@@ -1,5 +1,6 @@
 package game.view;
 
+import game.controller.GameController;
 import game.view.components.DrawDeck;
 import game.view.components.OpponentDeck;
 import game.view.components.OpponentSpecial;
@@ -27,6 +28,9 @@ public class GameView {
 
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
 
+        StackPane centerContainer = new StackPane();
+        root.setCenter(centerContainer);
+
         StackPane pauseOverlay = new StackPane();
 
         Button tutorialButton = new Button("Tutorial");
@@ -44,10 +48,13 @@ public class GameView {
         pauseMenu.setAlignment(Pos.CENTER);
 
         pauseOverlay.getChildren().add(pauseMenu);
-        root.setCenter(pauseOverlay);
+        centerContainer.getChildren().add(pauseOverlay);
         pauseOverlay.setVisible(false);
 
         pauseOverlay.setStyle("-fx-background-color: rgba(0, 0, 0, 0.75); -fx-alignment: center;");
+
+        StackPane turnMessagePane = new StackPane();
+        centerContainer.getChildren().add(turnMessagePane);
 
         scene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ESCAPE) {
@@ -57,11 +64,14 @@ public class GameView {
             }
         });
 
-        PlayerDeck playerDeckArea = new PlayerDeck(1600, 320, WINDOW_WIDTH, WINDOW_HEIGHT, Color.ORANGE);
+        GameController gameController = new GameController(turnMessagePane);
+
+        PlayerDeck playerDeckArea = new PlayerDeck(1600, 320, WINDOW_WIDTH, WINDOW_HEIGHT, Color.ORANGE, gameController);
         PlayerSpecial playerSpecialArea = new PlayerSpecial(WINDOW_HEIGHT - 760, WINDOW_WIDTH, WINDOW_HEIGHT, Color.GREEN);
         OpponentDeck opponentDeckArea = new OpponentDeck(1600, 320, WINDOW_WIDTH, WINDOW_HEIGHT, Color.ORANGE);
         OpponentSpecial opponentSpecialArea = new OpponentSpecial(WINDOW_HEIGHT - 760, WINDOW_WIDTH, WINDOW_HEIGHT, Color.GREEN);
         DrawDeck drawDeckArea = new DrawDeck(250, 440, WINDOW_WIDTH, WINDOW_HEIGHT, Color.BLUE);
+
         root.getChildren().addAll(playerDeckArea, playerSpecialArea, opponentDeckArea, opponentSpecialArea, drawDeckArea);
 
         primaryStage.setResizable(false);

@@ -9,6 +9,7 @@ game\Main.class
 game\util\PersistentStorage.class
 game\view\components\PlayerDeck.class
 game\view\components\OpponentSpecial.class
+game\controller\GameController.class
 game\view\Backgrounds\AirBackground.class
 game\view\components\PlayerSpecial.class
 game\model\Card.class
