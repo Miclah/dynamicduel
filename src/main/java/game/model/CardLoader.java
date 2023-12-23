@@ -2,6 +2,7 @@ package game.model;
 
 import javafx.scene.image.Image;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,18 +35,25 @@ public class CardLoader {
         return cards;
     }
 
-    private static Image resizeImage(String imagePath, double targetHeightFactor) {
-        try {
-            Image originalImage = new Image(CardLoader.class.getResourceAsStream(imagePath));
+   public static Image resizeImage(String imagePath, double targetHeightFactor) {
+    try {
+        InputStream inputStream = CardLoader.class.getResourceAsStream(imagePath);
+
+        if (inputStream != null) {
+            Image originalImage = new Image(inputStream);
             double targetHeight = screenHeight * targetHeightFactor;
             double aspectRatio = originalImage.getWidth() / originalImage.getHeight();
             double targetWidth = targetHeight * aspectRatio;
-            return new Image(CardLoader.class.getResourceAsStream(imagePath), targetWidth, targetHeight, true, true);
-        } catch (Exception e) {
+            return new Image(inputStream, targetWidth, targetHeight, true, true);
+        } else {
             System.err.println("Error loading image at path: " + imagePath);
-            e.printStackTrace();
             return null;
         }
+    } catch (Exception e) {
+        System.err.println("Error loading image at path: " + imagePath);
+        e.printStackTrace();
+        return null;
     }
-    
+}
+
 }

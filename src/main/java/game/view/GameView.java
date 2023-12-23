@@ -79,7 +79,7 @@ public class GameView {
         
 
         root.getChildren().addAll(playerDeckArea, playerSpecialArea, opponentDeckArea, opponentSpecialArea, drawDeckArea);
-        drawDeckArea.drawInitialCardsToGameView(centerContainer);
+        drawDeckArea.drawInitialCards(centerContainer);
 
         /* test
         List<Card> cards = CardLoader.loadCards();

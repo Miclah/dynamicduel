@@ -12,6 +12,7 @@ public class DrawDeck extends StackPane {
 
     private boolean initialDrawn = false;    
     private StackedDeck stackedDeck;
+    private Text cardCount;
 
     public DrawDeck(double width, double height, double screenWidth, double screenHeight, Color outlineColor) {
         Rectangle outline = new Rectangle(width, height, Color.TRANSPARENT);
@@ -26,9 +27,9 @@ public class DrawDeck extends StackPane {
         StackPane cardsPane = new StackPane(stackedDeck);
         cardsPane.setAlignment(Pos.CENTER);
 
-        Text cardCountText = new Text("Cards Left: " + stackedDeck.getRemainingCardCount());
-        cardCountText.setFill(Color.BLACK);
-        HBox textHBox = new HBox(cardCountText);
+        cardCount = new Text("Cards Left: " + stackedDeck.getRemainingCardCount());
+        cardCount.setFill(Color.BLACK);
+        HBox textHBox = new HBox(cardCount);
         textHBox.setAlignment(Pos.BOTTOM_CENTER);
         textHBox.setTranslateY(-30);
 
@@ -38,10 +39,15 @@ public class DrawDeck extends StackPane {
         getChildren().add(wholePane);
     }
 
-    public void drawInitialCardsToGameView(Pane gameViewPane) {
+    public void drawInitialCards(Pane gameViewPane) {
         if (!initialDrawn) {
             stackedDeck.drawInitialCards(gameViewPane);
             initialDrawn = true;
+            updateCardCount();
         }
+    }
+
+    public void updateCardCount() {
+        cardCount.setText("Cards Left: " + stackedDeck.getRemainingCardCount());
     }
 }
