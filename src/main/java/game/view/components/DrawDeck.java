@@ -2,6 +2,7 @@ package game.view.components;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -9,6 +10,7 @@ import javafx.scene.text.Text;
 
 public class DrawDeck extends StackPane {
 
+    private boolean initialDrawn = false;    
     private StackedDeck stackedDeck;
 
     public DrawDeck(double width, double height, double screenWidth, double screenHeight, Color outlineColor) {
@@ -34,7 +36,12 @@ public class DrawDeck extends StackPane {
         wholePane.setAlignment(Pos.CENTER);
 
         getChildren().add(wholePane);
+    }
 
-        setMouseTransparent(true);
+    public void drawInitialCardsToGameView(Pane gameViewPane) {
+        if (!initialDrawn) {
+            stackedDeck.drawInitialCards(gameViewPane);
+            initialDrawn = true;
+        }
     }
 }

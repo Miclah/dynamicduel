@@ -10,6 +10,8 @@ import javafx.scene.shape.Rectangle;
 public class PlayerDeck extends StackPane {
 
     private GameController gameController;
+    private GridOutline gridOutline; 
+    
 
     public PlayerDeck(double width, double height, double screenWidth, double screenHeight, Color outlineColor, GameController gameController) {
         Rectangle deckOutline = new Rectangle(width, height, Color.TRANSPARENT);
@@ -28,6 +30,12 @@ public class PlayerDeck extends StackPane {
         endTurnButton.setTranslateX(675);
 
         getChildren().addAll(deckOutline, endTurnButton);
+
+        // Initialize the grid outline
+        gridOutline = new GridOutline(width, height, Color.RED);
+        gridOutline.setVisible(false);
+        getChildren().add(gridOutline);
+
     }
 
     private Button createEndTurnButton() {
@@ -44,4 +52,6 @@ public class PlayerDeck extends StackPane {
         System.out.println("Player ended turn");
         gameController.startOpponentTurn();
     }
+
+    
 }

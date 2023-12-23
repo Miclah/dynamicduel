@@ -13,10 +13,12 @@ game\controller\GameController.class
 game\view\Backgrounds\AirBackground.class
 game\view\components\PlayerSpecial.class
 game\model\Card.class
+game\view\components\GridOutline.class
 game\model\CardType.class
 module-info.class
 game\model\CardLoader.class
 game\view\Backgrounds\FireBackground.class
+game\model\AI.class
 game\view\components\StackedDeck.class
 game\view\Options.class
 game\view\GameView.class

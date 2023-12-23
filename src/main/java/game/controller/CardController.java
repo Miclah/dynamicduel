@@ -1,6 +1,5 @@
 package game.controller;
 
-import game.model.Card;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -9,23 +8,12 @@ import javafx.scene.input.MouseEvent;
 public class CardController {
     private double xOffset, yOffset;
 
-    public ImageView createCardImageView(Card card, double screenHeight) {
-        ImageView cardImageView = new ImageView(card.getFrontImage());
+    public void setupCardInteraction(ImageView cardImageView) {
         cardImageView.setPreserveRatio(true);
-
-        double originalWidth = card.getFrontImage().getWidth();
-        double originalHeight = card.getFrontImage().getHeight();
-        double aspectRatio = originalWidth / originalHeight;
-        double initialWidth = screenHeight / 4.0 * aspectRatio;
-        cardImageView.setFitWidth(initialWidth);
-
-        cardImageView.setUserData(card);
 
         cardImageView.setOnMousePressed(this::handleMousePressed);
         cardImageView.setOnMouseDragged(this::handleMouseDragged);
         cardImageView.setOnMouseReleased(this::handleMouseReleased);
-
-        return cardImageView;
     }
 
     private void handleMousePressed(MouseEvent event) {
