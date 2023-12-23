@@ -11,14 +11,18 @@ import game.view.components.OpponentSpecial;
 import game.view.components.PlayerDeck;
 import game.view.components.PlayerSpecial;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class GameView {
@@ -27,6 +31,12 @@ public class GameView {
     private static final double WINDOW_HEIGHT = 1080;
 
     public static void displayGame(Stage primaryStage) {
+
+        if (!isResolutionSupported()) {
+            displayResolutionErrorPopup(primaryStage);
+            return;
+        }
+
         primaryStage.setTitle("Dynamic Duel");
 
         BorderPane root = new BorderPane();
@@ -102,6 +112,30 @@ public class GameView {
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    private static boolean isResolutionSupported() {
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+
+        double screenWidth = bounds.getWidth();
+        double screenHeight = bounds.getHeight();
+
+        return screenWidth >= WINDOW_WIDTH && screenHeight >= WINDOW_HEIGHT;
+    }
+
+    private static void displayResolutionErrorPopup(Stage primaryStage) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Resolution Error");
+        alert.setHeaderText("Minimum Resolution Requirement Not Met");
+        alert.setContentText("Please make sure your screen resolution is at least 1920x1080 to play the game.");
+        alert.setGraphic(null);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(GameView.class.getResource("/Styles/Menu/resolution_popup.css").toExternalForm());
+
+        alert.showAndWait();
+
+        primaryStage.close();
     }
 
     public static double getWindowWidth() {

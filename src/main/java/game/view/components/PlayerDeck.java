@@ -35,6 +35,7 @@ public class PlayerDeck extends StackPane {
         gridOutline = new GridOutline(width, height, Color.RED);
         gridOutline.setVisible(false);
         getChildren().add(gridOutline);
+        
 
     }
 

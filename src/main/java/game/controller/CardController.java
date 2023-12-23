@@ -23,6 +23,7 @@ public class CardController {
             yOffset = event.getSceneY() - cardImageView.getTranslateY();
 
             cardImageView.setEffect(new DropShadow());
+            
 
         } else if (event.getButton() == MouseButton.SECONDARY) {
             System.out.println("Right mouse button clicked");

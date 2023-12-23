@@ -36,10 +36,7 @@ public class StackedDeck extends StackPane {
         cardImagesContainer.setMaxSize(deckWidth, deckHeight);
     
         this.overlap = deckHeight * OVERLAP_FACTOR;
-    
-        System.out.println("Before adding cardImagesContainer to StackPane: " + getChildren());
         getChildren().add(cardImagesContainer);
-        System.out.println("After adding cardImagesContainer to StackPane: " + getChildren());
     
         setMaxHeight(deckHeight);
         setMaxWidth(deckWidth);
@@ -87,9 +84,7 @@ public class StackedDeck extends StackPane {
 
             new CardController().setupCardInteraction(cardImageView);
 
-            System.out.println("Before adding cardImageView to cardImagesContainer: " + cardImagesContainer.getChildren());
             cardImagesContainer.getChildren().add(cardImageView);
-            System.out.println("After adding cardImageView to cardImagesContainer: " + cardImagesContainer.getChildren());
 
             card.setFlipped(true);
         }
@@ -158,18 +153,11 @@ public class StackedDeck extends StackPane {
                 Image frontImage = new Image(getClass().getResourceAsStream(frontImagePath));
     
                 Image backImage = new Image(getClass().getResourceAsStream(CARD_BACK_IMAGE_PATH));
-
-                System.out.println("Front Image Loaded: " + frontImage);
-                System.out.println("Back Image Loaded: " + backImage);
                 Card card = new Card(cardType, frontImage, backImage);
     
                 for (int i = 0; i < quantity; i++) {
                     cards.add(card);
                 }
-                System.out.println("Loaded card: " + card.getCardType() + ", Front Image: " + card.getFrontImage());
-                System.out.println("Front Image Dimensions: " + card.getFrontImage().getWidth() + " x " + card.getFrontImage().getHeight());
-                System.out.println("Back Image Dimensions: " + card.getBackImage().getWidth() + " x " + card.getBackImage().getHeight());
-
             }
     
         } catch (IOException e) {

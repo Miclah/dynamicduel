@@ -70,11 +70,11 @@ public class MainMenu extends Application {
         
         if (!hasFadeInPlayed) {
             FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), root);
-            fadeTransition.setFromValue(0.25); // Start from the darker shade
+            fadeTransition.setFromValue(0.25); 
             fadeTransition.setToValue(1);
             fadeTransition.play();
     
-            hasFadeInPlayed = true; // Set the flag to true after playing once
+            hasFadeInPlayed = true; 
         }
         primaryStage.setScene(scene);
 
