@@ -1,6 +1,6 @@
 package game.controller;
 
-import game.model.AI;
+import game.model.AIController;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -31,7 +31,7 @@ public class GameController {
         displayTurnMessage("Opponent's Turn");
 
         Timeline delayTimeline = new Timeline(
-                new KeyFrame(Duration.seconds(2), event -> AI.performTurn(this))
+                new KeyFrame(Duration.seconds(2), event -> AIController.performTurn(this))
         );
         delayTimeline.play();
     }

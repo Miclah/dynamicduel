@@ -1,17 +1,26 @@
 package game.model;
 
-import game.controller.GameController;
-import javafx.application.Platform;
-
 public class AI {
 
-    public static void performTurn(GameController gameController) {
-        System.out.println("AI's Turn");
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Platform.runLater(() -> gameController.startPlayerTurn());
+    private int aiHealth;
+
+    public AI() {
+        resetAIHealth();
+    }
+
+    public int getHealth() {
+        return aiHealth;
+    }
+
+    public void setAIHealth(int aiHealth) {
+        this.aiHealth = Math.max(0, Math.min(100, aiHealth));
+    }
+
+    public void reduceAIHealth(int amount) {
+        this.aiHealth = Math.max(0, aiHealth - amount);
+    }
+
+    public void resetAIHealth() {
+        this.aiHealth = 95;
     }
 }
