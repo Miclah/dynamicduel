@@ -1,5 +1,6 @@
 package game.view.components;
 
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
@@ -98,7 +99,14 @@ public class PlayerSpecial extends StackPane {
         healthText.setVisible(true);
     }
 
-    private void updateHealthText() {
-        healthText.setText(String.valueOf(player.getHealth()));
+    public void updateHealthBarAndText() {
+        Platform.runLater(() -> {
+            healthBar.setProgress(player.getHealth() / 100.0);
+            updateHealthText();
+        });
+    }
+
+    public void updateHealthText() {
+        Platform.runLater(() -> healthText.setText(String.valueOf(player.getHealth())));
     }
 }

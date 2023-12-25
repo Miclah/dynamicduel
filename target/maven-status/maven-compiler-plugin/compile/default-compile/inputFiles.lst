@@ -3,7 +3,6 @@ D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\cont
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\components\PlayerSpecial.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\components\StackedDeck.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\controller\CardController.java
-D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\model\AIController.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\model\ElementType.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\model\CardLoader.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\module-info.java
@@ -20,6 +19,7 @@ D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\mode
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\Options.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\components\OpponentSpecial.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\Settings.java
+D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\controller\AIController.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\util\PersistentStorage.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\components\PlayerDeck.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\Backgrounds\WaterBackground.java

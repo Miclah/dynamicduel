@@ -1,12 +1,13 @@
-package game.model;
+package game.controller;
 
-import game.controller.GameController;
+import game.model.Player;
 import javafx.application.Platform;
 
 public class AIController {
 
-    public static void performTurn(GameController gameController) {
+    public static void performTurn(GameController gameController, Player player) {
         System.out.println("AI's Turn");
+        player.reduceHealth(10);
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {

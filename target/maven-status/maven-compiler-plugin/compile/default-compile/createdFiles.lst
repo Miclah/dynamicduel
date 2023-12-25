@@ -16,6 +16,7 @@ game\view\components\PlayerSpecial.class
 game\model\Card.class
 game\view\components\GridOutline.class
 game\model\CardType.class
+game\controller\AIController.class
 module-info.class
 game\model\CardLoader.class
 game\view\Backgrounds\FireBackground.class
@@ -25,4 +26,3 @@ game\view\Options.class
 game\view\GameView.class
 game\view\components\DrawDeck.class
 game\view\Settings.class
-game\model\AIController.class

@@ -1,6 +1,6 @@
 package game.controller;
 
-import game.model.AIController;
+import game.model.Player;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -13,9 +13,11 @@ public class GameController {
 
     private StackPane gamePane;
     private boolean playerTurn = false;
+    private Player player; 
 
-    public GameController(StackPane gamePane) {
+    public GameController(StackPane gamePane, Player player) {
         this.gamePane = gamePane;
+        this.player = player;
     }
 
     public void startPlayerTurn() {
@@ -31,7 +33,7 @@ public class GameController {
         displayTurnMessage("Opponent's Turn");
 
         Timeline delayTimeline = new Timeline(
-                new KeyFrame(Duration.seconds(2), event -> AIController.performTurn(this))
+                new KeyFrame(Duration.seconds(2), event -> AIController.performTurn(this, player))
         );
         delayTimeline.play();
     }
