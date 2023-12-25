@@ -7,6 +7,7 @@ import javafx.scene.input.MouseEvent;
 
 public class CardController {
     private double xOffset, yOffset;
+    
 
     public void setupCardInteraction(ImageView cardImageView) {
         cardImageView.setPreserveRatio(true);

@@ -11,6 +11,7 @@ public class PlayerDeck extends StackPane {
 
     private GameController gameController;
     private GridOutline gridOutline; 
+    private boolean cardDrawn = false;
     
 
     public PlayerDeck(double width, double height, double screenWidth, double screenHeight, Color outlineColor, GameController gameController) {
@@ -35,8 +36,6 @@ public class PlayerDeck extends StackPane {
         gridOutline = new GridOutline(width, height, Color.RED);
         gridOutline.setVisible(false);
         getChildren().add(gridOutline);
-        
-
     }
 
     private Button createEndTurnButton() {
@@ -50,9 +49,15 @@ public class PlayerDeck extends StackPane {
     }
 
     private void endTurnButtonClicked() {
-        System.out.println("Player ended turn");
-        gameController.startOpponentTurn();
+        if (cardDrawn) {
+            System.out.println("Player ended turn");
+            gameController.startOpponentTurn();
+            cardDrawn = false;
+        } else {
+            System.out.println("Cannot end turn without drawing a card.");
+        }
     }
-
-    
+    public void setCardDrawn(boolean cardDrawn) {
+        this.cardDrawn = cardDrawn;
+    }
 }

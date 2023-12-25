@@ -28,7 +28,7 @@ public class StackedDeck extends StackPane {
 
     private List<Card> stackedCards;
 
-    public StackedDeck(double deckWidth, double deckHeight) {
+    public StackedDeck(double deckWidth, double deckHeight, DrawDeck drawDeck) {
         this.stackedCards = loadStackedCards();
         shuffleDeck();
     
@@ -40,57 +40,57 @@ public class StackedDeck extends StackPane {
     
         setMaxHeight(deckHeight);
         setMaxWidth(deckWidth);
-    
     }
 
     private void shuffleDeck() {
         Collections.shuffle(stackedCards);
     }
+    
 
     public void drawInitialCards(Pane gameViewPane) {
         Pane cardImagesContainer = (Pane) getChildren().get(0);
-        for (int i = 0; i < 5; i++) {
+        int numCardsToDraw = Math.min(5, stackedCards.size());
+        for (int i = 0; i < numCardsToDraw; i++) {
             drawCard(i, cardImagesContainer);
-            stackedCards.remove(0);
         }
+
         updateStackedDeck();
-
+    
         List<Node> copyOfChildren = new ArrayList<>(cardImagesContainer.getChildren());
-
+    
         copyOfChildren.forEach(cardImageView -> gameViewPane.getChildren().add(cardImageView));
     }
-
     
     public void drawCard(int index, Pane cardImagesContainer) {
         if (!stackedCards.isEmpty() && index < stackedCards.size()) {
             Card card = stackedCards.get(index);
-
-
+    
             ImageView cardImageView = new ImageView(card.getFrontImage());
-
+    
             cardImageView.setTranslateX(-index * overlap);
             cardImageView.setTranslateY(-index * overlap);
-
+    
             double cardBackWidth = card.getFrontImage().getWidth();
             double cardBackHeight = card.getFrontImage().getHeight();
             double aspectRatio = cardBackWidth / cardBackHeight;
             double cardWidth = SCREEN_HEIGHT / 4.0 * aspectRatio;
-
+    
             cardImageView.setFitWidth(cardWidth);
-
+    
             cardImageView.imageProperty().bind(Bindings.when(card.flippedProperty())
                     .then(card.getFrontImage())
                     .otherwise(card.getBackImage()));
-
+    
             new CardController().setupCardInteraction(cardImageView);
-
+    
             cardImagesContainer.getChildren().add(cardImageView);
-
+    
             card.setFlipped(true);
+            stackedCards.remove(card); 
         }
     }
     
-
+    
     private void updateStackedDeck() {
         getChildren().clear(); 
 
@@ -116,7 +116,6 @@ public class StackedDeck extends StackPane {
         }
     }
     
-
     private List<Card> loadStackedCards() {
         List<Card> cards = new ArrayList<>();
     
@@ -169,5 +168,10 @@ public class StackedDeck extends StackPane {
     
     public int getRemainingCardCount() {
         return stackedCards.size();
+    }
+
+    public static int getInitialCardCount() {
+        StackedDeck tempStackedDeck = new StackedDeck(0, 0, null);
+        return tempStackedDeck.stackedCards.size();
     }
 }

@@ -59,7 +59,7 @@ public class GameController {
 
         timeline.play();
     }
-
+    
     private void resetStyle() {
         gamePane.getStylesheets().clear();
     }

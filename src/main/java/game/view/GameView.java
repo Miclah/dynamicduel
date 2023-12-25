@@ -8,6 +8,7 @@ import game.view.components.OpponentDeck;
 import game.view.components.OpponentSpecial;
 import game.view.components.PlayerDeck;
 import game.view.components.PlayerSpecial;
+import game.view.components.StackedDeck;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -19,7 +20,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
+import javafx.scene.paint.Color;    
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -32,7 +33,14 @@ public class GameView {
     public static void displayGame(Stage primaryStage) {
 
         if (!isResolutionSupported()) {
-            displayResolutionErrorPopup(primaryStage);
+            resolutionErrorPopup(primaryStage);
+            return;
+        }
+
+        int remainingCardCount = StackedDeck.getInitialCardCount();
+
+        if (remainingCardCount < 15) {
+            minCardCount(primaryStage);
             return;
         }
 
@@ -42,7 +50,6 @@ public class GameView {
 
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
         
-
         Pane transparentPane = new Pane();
         root.getChildren().add(transparentPane);
         transparentPane.toFront();
@@ -92,16 +99,17 @@ public class GameView {
         PlayerSpecial playerSpecialArea = new PlayerSpecial(WINDOW_HEIGHT - 760, WINDOW_WIDTH, WINDOW_HEIGHT, Color.GREEN, player, transparentPane);
         OpponentDeck opponentDeckArea = new OpponentDeck(1600, 320, WINDOW_WIDTH, WINDOW_HEIGHT, Color.ORANGE);
         OpponentSpecial opponentSpecialArea = new OpponentSpecial(WINDOW_HEIGHT - 760, WINDOW_WIDTH, WINDOW_HEIGHT, Color.GREEN, ai, transparentPane);
-        DrawDeck drawDeckArea = new DrawDeck(250, 440, WINDOW_WIDTH, WINDOW_HEIGHT, Color.BLUE);
+        DrawDeck drawDeckArea = new DrawDeck(250, 440, WINDOW_WIDTH, WINDOW_HEIGHT, Color.BLUE, playerDeckArea);
 
         root.getChildren().addAll(playerDeckArea, playerSpecialArea, opponentDeckArea, opponentSpecialArea, drawDeckArea);
         player.setPlayerSpecial(playerSpecialArea);
         drawDeckArea.drawInitialCards(centerContainer);
+        drawDeckArea.enableDrawCardInteraction(drawDeckArea, root, centerContainer);
+        drawDeckArea.toFront();
 
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
-
     }
 
     private static boolean isResolutionSupported() {
@@ -114,14 +122,28 @@ public class GameView {
         return screenWidth >= WINDOW_WIDTH && screenHeight >= WINDOW_HEIGHT;
     }
 
-    private static void displayResolutionErrorPopup(Stage primaryStage) {
+    private static void resolutionErrorPopup(Stage primaryStage) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Resolution Error");
         alert.setHeaderText("Minimum Resolution Requirement Not Met");
         alert.setContentText("Please make sure your screen resolution is at least 1920x1080 to play the game.");
         alert.setGraphic(null);
         DialogPane dialogPane = alert.getDialogPane();
-        dialogPane.getStylesheets().add(GameView.class.getResource("/Styles/Menu/resolution_popup.css").toExternalForm());
+        dialogPane.getStylesheets().add(GameView.class.getResource("/Styles/Game/game_error.css").toExternalForm());
+
+        alert.showAndWait();
+
+        primaryStage.close();
+    }
+
+    private static void minCardCount(Stage primaryStage) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Insufficient Cards");
+        alert.setHeaderText("Not Enough Cards in the Deck");
+        alert.setContentText("The deck must have at least 15 cards to start the game.");
+        alert.setGraphic(null);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(GameView.class.getResource("/Styles/Game/game_error.css").toExternalForm());
 
         alert.showAndWait();
 
