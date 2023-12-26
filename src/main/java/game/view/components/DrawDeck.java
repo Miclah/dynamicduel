@@ -1,6 +1,6 @@
 package game.view.components;
 
-import javafx.geometry.Bounds;
+import game.controller.GameController;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.input.MouseButton;
@@ -55,38 +55,31 @@ public class DrawDeck extends StackPane {
 
     public void updateCardCount() {
         cardCount.setText("Cards Left: " + stackedDeck.getRemainingCardCount());
-        playerDeck.setCardDrawn(true);
     }
 
-    public void enableDrawCardInteraction(DrawDeck drawDeck, Pane gameViewPane, StackPane centerContainer) {
+    public void enableDrawCardInteraction(DrawDeck drawDeck, Pane gameViewPane, StackPane centerContainer,  GameController gameController) {
         Pane cardImagesContainer = (Pane) getChildren().get(0);
     
         setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY) {
-                if (stackedDeck.getRemainingCardCount() > 0) {
-                    handleLeftClick(event, drawDeck, cardImagesContainer, gameViewPane, centerContainer);
+                if (!playerDeck.hasDrawnCardThisTurn() && stackedDeck.getRemainingCardCount() > 0) {
+                    double drawX = 600;
+                    double drawY = 380;
+                    handleLeftClick(event, drawDeck, cardImagesContainer, gameViewPane, centerContainer, drawX, drawY);
                 } else {
-                    System.out.println("No cards left in the deck.");
+                    gameController.oneCardRestiction();
                 }
             }
         });
     }
     
-    private void handleLeftClick(MouseEvent event, DrawDeck drawDeck, Pane cardImagesContainer, Pane gameViewPane, StackPane centerContainer) {
-        Node topCard = cardImagesContainer.getChildren().isEmpty() ? null :
-                cardImagesContainer.getChildren().get(cardImagesContainer.getChildren().size() - 1);
-    
-        if (topCard != null) {
-            Bounds boundsInScene = topCard.localToScene(topCard.getBoundsInLocal());
-            if (boundsInScene.contains(event.getSceneX(), event.getSceneY())) {
-                stackedDeck.drawCard(0, cardImagesContainer);
-                drawDeck.updateCardCount();
+    private void handleLeftClick(MouseEvent event, DrawDeck drawDeck, Pane cardImagesContainer, Pane gameViewPane, StackPane centerContainer, double drawX, double drawY) {
+        stackedDeck.drawCard(0, cardImagesContainer, drawX, drawY);
+        drawDeck.updateCardCount();
 
-                Node drawnCard = cardImagesContainer.getChildren().remove(cardImagesContainer.getChildren().size() - 1);
-                centerContainer.getChildren().add(drawnCard);
-                return;
-            }
-        }
-        System.out.println("Left mouse button clicked outside the top card.");
-    }
+        Node drawnCard = cardImagesContainer.getChildren().remove(cardImagesContainer.getChildren().size() - 1);
+        centerContainer.getChildren().add(drawnCard);
+        playerDeck.setCardDrawn(true);
+        PlayerDeck.incrementCardsDrawnThisTurn();
+    }    
 }

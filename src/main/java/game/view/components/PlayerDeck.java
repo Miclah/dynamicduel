@@ -10,14 +10,17 @@ import javafx.scene.shape.Rectangle;
 public class PlayerDeck extends StackPane {
 
     private GameController gameController;
-    private GridOutline gridOutline; 
-    private boolean cardDrawn = false;
-    
+    private GridOutline gridOutline;
+    private boolean cardDrawn;
+    private static int cardsDrawnThisTurn;
 
     public PlayerDeck(double width, double height, double screenWidth, double screenHeight, Color outlineColor, GameController gameController) {
         Rectangle deckOutline = new Rectangle(width, height, Color.TRANSPARENT);
         deckOutline.setStroke(outlineColor);
         deckOutline.setStrokeWidth(2);
+
+        this.gameController = gameController;
+        cardsDrawnThisTurn = 0;
 
         setTranslateX(screenWidth - width / 2);
         setTranslateY(screenHeight - height / 2);
@@ -52,12 +55,25 @@ public class PlayerDeck extends StackPane {
         if (cardDrawn) {
             System.out.println("Player ended turn");
             gameController.startOpponentTurn();
-            cardDrawn = false;
+            this.cardDrawn = false;
         } else {
-            System.out.println("Cannot end turn without drawing a card.");
+            gameController.displayDrawCardMessage();
         }
     }
+    
     public void setCardDrawn(boolean cardDrawn) {
         this.cardDrawn = cardDrawn;
+    }    
+
+    public static void resetCardDrawn() {
+        cardsDrawnThisTurn = 0;
     }
+
+    public static void incrementCardsDrawnThisTurn() {
+        cardsDrawnThisTurn++;
+    }
+    public boolean hasDrawnCardThisTurn() {
+        return cardsDrawnThisTurn > 0;
+    }
+    
 }

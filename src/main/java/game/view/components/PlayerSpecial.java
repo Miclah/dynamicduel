@@ -43,6 +43,7 @@ public class PlayerSpecial extends StackPane {
 
         StackPane wholePane = new StackPane(outline, specialImageView);
         wholePane.setAlignment(Pos.CENTER);
+        
 
         getChildren().add(wholePane);
     }
