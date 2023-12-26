@@ -4,7 +4,6 @@ import game.controller.GameController;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -57,29 +56,33 @@ public class DrawDeck extends StackPane {
         cardCount.setText("Cards Left: " + stackedDeck.getRemainingCardCount());
     }
 
-    public void enableDrawCardInteraction(DrawDeck drawDeck, Pane gameViewPane, StackPane centerContainer,  GameController gameController) {
+    public void enableDrawCardInteraction(DrawDeck drawDeck, Pane gameViewPane, StackPane centerContainer, GameController gameController) {
         Pane cardImagesContainer = (Pane) getChildren().get(0);
+        
     
         setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY) {
                 if (!playerDeck.hasDrawnCardThisTurn() && stackedDeck.getRemainingCardCount() > 0) {
                     double drawX = 600;
                     double drawY = 380;
-                    handleLeftClick(event, drawDeck, cardImagesContainer, gameViewPane, centerContainer, drawX, drawY);
+                    handleLeftClick(drawDeck, cardImagesContainer, gameViewPane, centerContainer, drawX, drawY);
                 } else {
                     gameController.oneCardRestiction();
                 }
+            } else if (event.getButton() == MouseButton.SECONDARY) {
+                System.out.println("Right mouse button clicked");
             }
         });
     }
     
-    private void handleLeftClick(MouseEvent event, DrawDeck drawDeck, Pane cardImagesContainer, Pane gameViewPane, StackPane centerContainer, double drawX, double drawY) {
+    private void handleLeftClick(DrawDeck drawDeck, Pane cardImagesContainer, Pane gameViewPane, StackPane centerContainer, double drawX, double drawY) {
         stackedDeck.drawCard(0, cardImagesContainer, drawX, drawY);
         drawDeck.updateCardCount();
-
+    
         Node drawnCard = cardImagesContainer.getChildren().remove(cardImagesContainer.getChildren().size() - 1);
         centerContainer.getChildren().add(drawnCard);
         playerDeck.setCardDrawn(true);
         PlayerDeck.incrementCardsDrawnThisTurn();
-    }    
+        drawnCard.toFront();
+    }
 }

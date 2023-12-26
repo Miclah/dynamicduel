@@ -38,12 +38,12 @@ public class StackedDeck extends StackPane {
     
         setMaxHeight(deckHeight);
         setMaxWidth(deckWidth);
+        
     }
 
     private void shuffleDeck() {
         Collections.shuffle(stackedCards);
     }
-    
 
     public void drawInitialCards(Pane gameViewPane) {
         Pane cardImagesContainer = (Pane) getChildren().get(0);
@@ -79,6 +79,7 @@ public class StackedDeck extends StackPane {
             double cardWidth = SCREEN_HEIGHT / 4.0 * aspectRatio;
     
             cardImageView.setFitWidth(cardWidth);
+            cardImageView.setMouseTransparent(false);
     
             cardImageView.imageProperty().bind(Bindings.when(card.flippedProperty())
                     .then(card.getFrontImage())
@@ -92,7 +93,6 @@ public class StackedDeck extends StackPane {
             stackedCards.remove(card);
         }
     }
-    
     
     private void updateStackedDeck() {
         getChildren().clear(); 
@@ -115,6 +115,7 @@ public class StackedDeck extends StackPane {
             cardImageView.setFitWidth(cardWidth);
             cardImageView.setTranslateY(-i * overlap);
 
+            cardImageView.setMouseTransparent(false);
             getChildren().add(cardImageView);
         }
     }

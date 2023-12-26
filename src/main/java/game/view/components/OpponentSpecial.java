@@ -1,5 +1,6 @@
 package game.view.components;
 
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
@@ -97,7 +98,14 @@ public class OpponentSpecial extends StackPane {
         healthText.setVisible(true);
     }
 
+     public void updateAIHealthBarAndText() {
+        Platform.runLater(() -> {
+            healthBar.setProgress(opponentAI.getHealth() / 100.0);
+            updateAIHealthText();
+        });
+    }
+
     private void updateAIHealthText() {
-        healthText.setText(String.valueOf(opponentAI.getHealth()));
+        Platform.runLater(() -> healthText.setText(String.valueOf(opponentAI.getHealth())));
     }
 }

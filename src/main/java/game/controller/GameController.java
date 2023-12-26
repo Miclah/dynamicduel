@@ -9,15 +9,10 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -132,7 +127,7 @@ public class GameController {
         HBox buttonBox = new HBox(20, restartButton, exitButton);
         buttonBox.setAlignment(Pos.CENTER);
         StackPane.setAlignment(buttonBox, Pos.BOTTOM_CENTER);
-        buttonBox.setTranslateY(50);
+        buttonBox.setTranslateY(60);
         gamePane.getChildren().add(buttonBox);
 
         //TODO: make the windows elements no interactible with other than restart and mainmenu buttons.

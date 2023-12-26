@@ -83,7 +83,7 @@ public class MainMenu extends Application {
         MusicPlayer.playMainMenuMusic();
 
         primaryStage.setOnHidden(e -> {
-            MusicPlayer.resetIsMusicPlaying(); // Reset isMusicPlaying when returning to MainMenu
+            MusicPlayer.resetIsMusicPlaying(); 
         });
 
         primaryStage.setOnCloseRequest(e -> {

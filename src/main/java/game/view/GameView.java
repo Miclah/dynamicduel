@@ -90,12 +90,13 @@ public class GameView {
                 pauseOverlay.getStylesheets().add(GameView.class.getResource("/Styles/Menu/pause_overlay.css").toExternalForm());
             }
         });
+        
 
         Player player = new Player();
         AI ai = new AI();
         GameController gameController = new GameController(turnMessagePane, player, ai);
 
-        PlayerDeck playerDeckArea = new PlayerDeck(1600, 320, WINDOW_WIDTH, WINDOW_HEIGHT, Color.ORANGE, gameController);
+        PlayerDeck playerDeckArea = new PlayerDeck(1600, 320, WINDOW_WIDTH, WINDOW_HEIGHT, Color.ORANGE, gameController, ai);
         PlayerSpecial playerSpecialArea = new PlayerSpecial(WINDOW_HEIGHT - 760, WINDOW_WIDTH, WINDOW_HEIGHT, Color.GREEN, player, transparentPane);
         OpponentDeck opponentDeckArea = new OpponentDeck(1600, 320, WINDOW_WIDTH, WINDOW_HEIGHT, Color.ORANGE);
         OpponentSpecial opponentSpecialArea = new OpponentSpecial(WINDOW_HEIGHT - 760, WINDOW_WIDTH, WINDOW_HEIGHT, Color.GREEN, ai, transparentPane);
@@ -104,10 +105,12 @@ public class GameView {
         root.getChildren().addAll(playerDeckArea, playerSpecialArea, opponentDeckArea, opponentSpecialArea, drawDeckArea);
         player.setPlayerSpecial(playerSpecialArea);
         ai.setGameController(gameController);
+        ai.setOpponentSpecial(opponentSpecialArea);
         player.setGameController(gameController);
         drawDeckArea.drawInitialCards(centerContainer);
         drawDeckArea.enableDrawCardInteraction(drawDeckArea, root, centerContainer, gameController);
         drawDeckArea.toFront();
+        playerDeckArea.toFront();
 
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);

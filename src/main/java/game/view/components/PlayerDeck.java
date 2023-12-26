@@ -1,8 +1,10 @@
 package game.view.components;
 
 import game.controller.GameController;
+import game.model.AI;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -13,32 +15,34 @@ public class PlayerDeck extends StackPane {
     private GridOutline gridOutline;
     private boolean cardDrawn;
     private static int cardsDrawnThisTurn;
+    private AI opponentAI;
 
-    public PlayerDeck(double width, double height, double screenWidth, double screenHeight, Color outlineColor, GameController gameController) {
+    public PlayerDeck(double width, double height, double screenWidth, double screenHeight, Color outlineColor, GameController gameController, AI opponentAI) {
         Rectangle deckOutline = new Rectangle(width, height, Color.TRANSPARENT);
         deckOutline.setStroke(outlineColor);
         deckOutline.setStrokeWidth(2);
 
         this.gameController = gameController;
+        this.opponentAI = opponentAI; 
         cardsDrawnThisTurn = 0;
 
-        setTranslateX(screenWidth - width / 2);
-        setTranslateY(screenHeight - height / 2);
+        setTranslateX(320);
+        setTranslateY(760);
 
-        deckOutline.setMouseTransparent(true);
-
-        this.gameController = gameController;
         Button endTurnButton = createEndTurnButton();
 
         StackPane.setAlignment(endTurnButton, Pos.CENTER);
-        endTurnButton.setTranslateX(675);
-
-        getChildren().addAll(deckOutline, endTurnButton);
-
-        // Initialize the grid outline
+        endTurnButton.setTranslateX(1500);
+        endTurnButton.setTranslateY(160);
+        
+        Pane outlinePane = new Pane(deckOutline);
+        outlinePane.setMouseTransparent(true);
+   
         gridOutline = new GridOutline(width, height, Color.RED);
         gridOutline.setVisible(false);
-        getChildren().add(gridOutline);
+        setMouseTransparent(false);
+        setPickOnBounds(false); 
+        getChildren().addAll(endTurnButton, outlinePane, gridOutline);
     }
 
     private Button createEndTurnButton() {
@@ -56,11 +60,12 @@ public class PlayerDeck extends StackPane {
             System.out.println("Player ended turn");
             gameController.startOpponentTurn();
             this.cardDrawn = false;
+            opponentAI.reduceAIHealth(60); 
         } else {
             gameController.displayDrawCardMessage();
         }
     }
-    
+
     public void setCardDrawn(boolean cardDrawn) {
         this.cardDrawn = cardDrawn;
     }    

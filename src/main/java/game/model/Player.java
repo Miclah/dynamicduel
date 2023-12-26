@@ -43,10 +43,6 @@ public class Player {
         this.health = 95;
     }
 
-    public boolean isDefeated() {
-        return health <= 0;
-    }
-
     public void setGameController(GameController gameController) {
         this.gameController = gameController;
     }

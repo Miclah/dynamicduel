@@ -28,6 +28,7 @@ public class CardController {
 
         } else if (event.getButton() == MouseButton.SECONDARY) {
             System.out.println("Right mouse button clicked");
+            System.out.println("Event source class: " + event.getSource().getClass()); // Add this debug statement
         }
     }
 

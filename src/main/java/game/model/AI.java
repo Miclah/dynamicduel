@@ -1,14 +1,20 @@
 package game.model;
 
 import game.controller.GameController;
+import game.view.components.OpponentSpecial;
 
 public class AI {
 
     private int aiHealth;
+    private OpponentSpecial opponentSpecialArea;
     private GameController gameController;
 
     public AI() {
         resetAIHealth();
+    }
+
+    public void setOpponentSpecial(OpponentSpecial opponentSpecialArea ) {
+        this.opponentSpecialArea = opponentSpecialArea;
     }
 
     public int getHealth() {
@@ -21,8 +27,15 @@ public class AI {
 
     public void reduceAIHealth(int amount) {
         this.aiHealth = Math.max(0, aiHealth - amount);
+        updateAIHealth();
         if (gameController != null) {
             gameController.checkVictoryCondition();
+        }
+    }
+
+    private void updateAIHealth() {
+        if (opponentSpecialArea != null) {
+            opponentSpecialArea.updateAIHealthBarAndText();
         }
     }
 

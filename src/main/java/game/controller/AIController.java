@@ -7,7 +7,7 @@ public class AIController {
 
     public static void performTurn(GameController gameController, Player player) {
         System.out.println("AI's Turn");
-        player.reduceHealth(80);
+        player.reduceHealth(10);
         try {
             Thread.sleep(10);
         } catch (InterruptedException e) {
