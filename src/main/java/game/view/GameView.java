@@ -103,11 +103,13 @@ public class GameView {
         DrawDeck drawDeckArea = new DrawDeck(250, 440, WINDOW_WIDTH, WINDOW_HEIGHT, Color.BLUE, playerDeckArea);
 
         root.getChildren().addAll(playerDeckArea, playerSpecialArea, opponentDeckArea, opponentSpecialArea, drawDeckArea);
+        gameController.setDrawDeck(drawDeckArea);
         player.setPlayerSpecial(playerSpecialArea);
         ai.setGameController(gameController);
         ai.setOpponentSpecial(opponentSpecialArea);
         player.setGameController(gameController);
-        drawDeckArea.drawInitialCards(centerContainer);
+        drawDeckArea.drawInitialCards(centerContainer, true);
+        drawDeckArea.drawInitialCardsForAI(centerContainer, false); 
         drawDeckArea.enableDrawCardInteraction(drawDeckArea, root, centerContainer, gameController);
         drawDeckArea.toFront();
         playerDeckArea.toFront();

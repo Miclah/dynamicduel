@@ -45,50 +45,64 @@ public class StackedDeck extends StackPane {
         Collections.shuffle(stackedCards);
     }
 
-    public void drawInitialCards(Pane gameViewPane) {
+    public void drawInitialCards(Pane gameViewPane, boolean isPlayerCard) {
         Pane cardImagesContainer = (Pane) getChildren().get(0);
         int numCardsToDraw = Math.min(5, stackedCards.size());
-    
-        double initialX = -510;  
-        double initialY = 380; 
-        double xIncrement = 130; 
-    
+
         for (int i = 0; i < numCardsToDraw; i++) {
-            drawCard(i, cardImagesContainer, initialX + i * xIncrement, initialY);
+            double initialX = -510;
+            double initialY = 380; 
+            double xIncrement = 130; 
+            drawCard(i, cardImagesContainer, initialX + i * xIncrement, initialY, isPlayerCard);
+
         }
     
         updateStackedDeck();
-    
         List<Node> copyOfChildren = new ArrayList<>(cardImagesContainer.getChildren());
-    
+        copyOfChildren.forEach(cardImageView -> gameViewPane.getChildren().add(cardImageView));
+    }
+
+    public void drawInitialCardsForAI(Pane gameViewPane, boolean isPlayerCard) {
+        Pane cardAIContainer = new Pane();
+        int numCardsToDraw = Math.min(5, stackedCards.size());
+
+        for (int i = 0; i < numCardsToDraw; i++) {
+            double initialX = -510;
+            double initialY = -380;
+            double xIncrement = 130;
+            drawCard(i, cardAIContainer, initialX + i * xIncrement, initialY, isPlayerCard);
+        }
+
+        updateStackedDeck();
+        List<Node> copyOfChildren = new ArrayList<>(cardAIContainer.getChildren());
         copyOfChildren.forEach(cardImageView -> gameViewPane.getChildren().add(cardImageView));
     }
     
-    public void drawCard(int index, Pane cardImagesContainer, double x, double y) {
+    public void drawCard(int index, Pane cardImagesContainer, double x, double y, boolean isPlayerCard) {
         if (!stackedCards.isEmpty() && index < stackedCards.size()) {
             Card card = stackedCards.get(index);
-    
-            ImageView cardImageView = new ImageView(card.getFrontImage());
-    
+
+            ImageView cardImageView = new ImageView();
+            cardImageView.setImage(isPlayerCard ? card.getFrontImage() : card.getBackImage());
+            cardImageView.setMouseTransparent(!isPlayerCard); 
+            new CardController().setupCardInteraction(cardImageView);
+
             cardImageView.setTranslateX(x);
             cardImageView.setTranslateY(y);
-    
+
             double cardBackWidth = card.getFrontImage().getWidth();
             double cardBackHeight = card.getFrontImage().getHeight();
             double aspectRatio = cardBackWidth / cardBackHeight;
             double cardWidth = SCREEN_HEIGHT / 4.0 * aspectRatio;
-    
+
             cardImageView.setFitWidth(cardWidth);
-            cardImageView.setMouseTransparent(false);
-    
+
             cardImageView.imageProperty().bind(Bindings.when(card.flippedProperty())
-                    .then(card.getFrontImage())
-                    .otherwise(card.getBackImage()));
-    
-            new CardController().setupCardInteraction(cardImageView);
-    
-            cardImagesContainer.getChildren().add(cardImageView);
-    
+                .then(isPlayerCard ? card.getFrontImage() : card.getBackImage())
+                .otherwise(isPlayerCard ? card.getBackImage() : card.getFrontImage()));
+
+        cardImagesContainer.getChildren().add(cardImageView);
+
             card.setFlipped(true);
             stackedCards.remove(card);
         }

@@ -44,12 +44,25 @@ public class DrawDeck extends StackPane {
         getChildren().add(wholePane);
     }
 
-    public void drawInitialCards(Pane gameViewPane) {
+    public void drawInitialCards(Pane gameViewPane, boolean isPlayerCard) {
         if (!initialDrawn) {
-            stackedDeck.drawInitialCards(gameViewPane);
+            stackedDeck.drawInitialCards(gameViewPane, isPlayerCard);
             initialDrawn = true;
             updateCardCount();
         }
+    }
+
+    public void drawInitialCardsForAI(Pane gameViewPane, boolean isPlayerCard) {
+        stackedDeck.drawInitialCardsForAI(gameViewPane, isPlayerCard);
+        updateCardCount();
+    }
+
+    public void drawCardForAI() {
+        Pane cardImagesContainer = (Pane) getChildren().get(0);
+        double drawX = -230;
+        double drawY = -380;
+        stackedDeck.drawCard(0, cardImagesContainer, drawX, drawY, false); // Pass false to indicate it's an AI card
+        updateCardCount();
     }
 
     public void updateCardCount() {
@@ -76,7 +89,7 @@ public class DrawDeck extends StackPane {
     }
     
     private void handleLeftClick(DrawDeck drawDeck, Pane cardImagesContainer, Pane gameViewPane, StackPane centerContainer, double drawX, double drawY) {
-        stackedDeck.drawCard(0, cardImagesContainer, drawX, drawY);
+        stackedDeck.drawCard(0, cardImagesContainer, drawX, drawY, true);
         drawDeck.updateCardCount();
     
         Node drawnCard = cardImagesContainer.getChildren().remove(cardImagesContainer.getChildren().size() - 1);

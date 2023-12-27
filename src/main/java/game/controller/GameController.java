@@ -4,6 +4,7 @@ import game.model.AI;
 import game.model.Player;
 import game.view.GameView;
 import game.view.MainMenu;
+import game.view.components.DrawDeck;
 import game.view.components.PlayerDeck;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -24,6 +25,7 @@ public class GameController {
     private Player player; 
     private AI ai;
     private Pane interactionBlocker;
+    private DrawDeck drawDeck;
 
 
     public GameController(StackPane gamePane, Player player, AI ai) {
@@ -32,6 +34,9 @@ public class GameController {
         this.ai = ai;
     }
 
+    public void setDrawDeck(DrawDeck drawDeck) {
+        this.drawDeck = drawDeck;
+    }
 
     public void startPlayerTurn() {
         if (!playerTurn) {
@@ -47,7 +52,7 @@ public class GameController {
         displayTurnMessage("Opponent's Turn");
 
         Timeline delayTimeline = new Timeline(
-                new KeyFrame(Duration.seconds(2), event -> AIController.performTurn(this, player))
+                new KeyFrame(Duration.seconds(2), event -> AIController.performTurn(this, player, drawDeck))
         );
         delayTimeline.play();
     }

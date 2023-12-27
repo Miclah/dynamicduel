@@ -32,7 +32,7 @@ public class PlayerDeck extends StackPane {
         Button endTurnButton = createEndTurnButton();
 
         StackPane.setAlignment(endTurnButton, Pos.CENTER);
-        endTurnButton.setTranslateX(1500);
+        endTurnButton.setTranslateX(1475);
         endTurnButton.setTranslateY(160);
         
         Pane outlinePane = new Pane(deckOutline);
