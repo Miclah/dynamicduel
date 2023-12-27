@@ -11,73 +11,107 @@ import game.view.Settings;
 
 public class MusicPlayer {
 
-    private static final String MUSIC_FILE_PATH = "src/main/resources/Music/MainMenu.mp3";
+    private static final String MAIN_MENU = "src/main/resources/Music/MainMenu.mp3";
+    private static final String GAME_1 = "src/main/resources/Music/Game1.mp3";
+    //private static final String GAME_2 = "src/main/resources/Music/Game2.mp3";
     private static MediaPlayer mediaPlayer;
+    private static Media media; 
 
     private static boolean isMusicPlaying = false;
     private static boolean isPopupShown = false;
+    private static boolean isGameMusicLooping = false;
 
     public static void playMainMenuMusic() {
+        stopMusic(false);
+        disposeMediaPlayer();
+        playMusic(MAIN_MENU);
+    }
+    
+    public static void playGameMusic1() {
+        stopMusic(false);
+        disposeMediaPlayer();
+        playMusic(GAME_1);
+        setGameMusicLooping(true, GAME_1);
+    }
+
+    /*public static void playGameMusic2() {
+        playMusic(GAME_2);
+        setGameMusicLooping(true, GAME_1);
+    }*/
+
+    private static void playMusic(String musicPath) {
+        System.out.println("Attempting to play music: " + musicPath);
         if (!isMusicPlaying) {
             try {
-                File musicFile = new File(MUSIC_FILE_PATH);
-                
-                // Check if the file exists before attempting to load
+                File musicFile = new File(musicPath);
+    
                 if (!musicFile.exists()) {
                     handleMusicLoadError();
                     return;
                 }
     
-                Media media = new Media(musicFile.toURI().toString());
+                media = new Media(musicFile.toURI().toString());
                 mediaPlayer = new MediaPlayer(media);
     
-                mediaPlayer.setOnReady(() -> {
-                    isMusicPlaying = true;
-                    setMusicVolume();
-                    mediaPlayer.play();
-                });
-    
                 mediaPlayer.setOnEndOfMedia(() -> {
-                    stopMusic();  // Stop the music when it reaches the end
+                    stopMusic(false);
                 });
     
                 mediaPlayer.setOnError(() -> {
                     handleMusicLoadError();
                 });
     
+                isMusicPlaying = true;
+                setMusicVolume();
+                mediaPlayer.play();
+    
             } catch (MediaException e) {
-                // Handle the exception, e.g., print an error message
-                System.err.println("Error loading MainMenu.mp3: " + e.getMessage());
                 handleMusicLoadError();
             }
         }
     }
     
+    private static void setGameMusicLooping(boolean loop, String nextMusic) {
+        if (!isGameMusicLooping && mediaPlayer != null) {
+            mediaPlayer.setOnEndOfMedia(() -> {
+                if (loop) {
+                    playMusic(nextMusic);
+                }
+            });
+            isGameMusicLooping = true;
+        }
+    }
+    
     private static void handleMusicLoadError() {
-        // Check if the pop-up has already been shown
         if (!isPopupShown) {
             isPopupShown = true;
-            // For example, you can display an alert to the user:
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Error loading music");
             alert.setContentText("There was an error loading the music file. Please make sure the file exists and try again.");
             alert.getDialogPane().getStylesheets().add(Settings.class.getResource("/Styles/Menu/music_popup.css").toExternalForm());
             alert.setGraphic(null);
-    
-            // Promptly show the alert
+
             alert.showAndWait();
         }
     }
 
-    public static void stopMusic() {
+    public static void stopMusic(boolean intentionalStop) {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
-            mediaPlayer.dispose();  // Dispose the media player to release resources
+            if (!intentionalStop) {
+                resetIsMusicPlaying();
+            }
+        }
+    }
+    
+    public static void disposeMediaPlayer() {
+        if (mediaPlayer != null) {
+            mediaPlayer.dispose();
             mediaPlayer = null;
         }
     }
-
+    
     public static void setMusicVolume() {
         if (mediaPlayer != null) {
             int musicVolume = Settings.getMusicVolume();

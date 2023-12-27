@@ -3,6 +3,7 @@ package game.view;
 import game.controller.GameController;
 import game.model.AI;
 import game.model.Player;
+import game.util.MusicPlayer;
 import game.view.components.DrawDeck;
 import game.view.components.OpponentDeck;
 import game.view.components.OpponentSpecial;
@@ -29,7 +30,6 @@ public class GameView {
     private static final double WINDOW_WIDTH = 1920;
     private static final double WINDOW_HEIGHT = 1080;
     
-
     public static void displayGame(Stage primaryStage) {
 
         if (!isResolutionSupported()) {
@@ -43,7 +43,7 @@ public class GameView {
             minCardCount(primaryStage);
             return;
         }
-
+        MusicPlayer.playGameMusic1();
         primaryStage.setTitle("Dynamic Duel");
 
         BorderPane root = new BorderPane();
@@ -53,7 +53,6 @@ public class GameView {
         Pane transparentPane = new Pane();
         root.getChildren().add(transparentPane);
         transparentPane.toFront();
-
 
         StackPane centerContainer = new StackPane();
         root.setCenter(centerContainer);
@@ -90,7 +89,9 @@ public class GameView {
                 pauseOverlay.getStylesheets().add(GameView.class.getResource("/Styles/Menu/pause_overlay.css").toExternalForm());
             }
         });
-        
+        primaryStage.setOnHidden(event -> {
+            MusicPlayer.stopMusic(false);
+        });
 
         Player player = new Player();
         AI ai = new AI();
@@ -111,8 +112,6 @@ public class GameView {
         drawDeckArea.drawInitialCards(centerContainer, true);
         drawDeckArea.drawInitialCardsForAI(centerContainer, false); 
         drawDeckArea.enableDrawCardInteraction(drawDeckArea, root, centerContainer, gameController);
-        drawDeckArea.toFront();
-        playerDeckArea.toFront();
 
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
@@ -139,7 +138,6 @@ public class GameView {
         dialogPane.getStylesheets().add(GameView.class.getResource("/Styles/Game/game_error.css").toExternalForm());
 
         alert.showAndWait();
-
         primaryStage.close();
     }
 
@@ -153,7 +151,6 @@ public class GameView {
         dialogPane.getStylesheets().add(GameView.class.getResource("/Styles/Game/game_error.css").toExternalForm());
 
         alert.showAndWait();
-
         primaryStage.close();
     }
 

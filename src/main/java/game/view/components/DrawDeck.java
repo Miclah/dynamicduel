@@ -69,6 +69,7 @@ public class DrawDeck extends StackPane {
         cardCount.setText("Cards Left: " + stackedDeck.getRemainingCardCount());
     }
 
+    //TODO: Fix the ability to draw a card by clicking on the AI's drawn card
     public void enableDrawCardInteraction(DrawDeck drawDeck, Pane gameViewPane, StackPane centerContainer, GameController gameController) {
         Pane cardImagesContainer = (Pane) getChildren().get(0);
         

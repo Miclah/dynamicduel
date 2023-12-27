@@ -38,6 +38,8 @@ public class GameController {
         this.drawDeck = drawDeck;
     }
 
+    
+
     public void startPlayerTurn() {
         if (!playerTurn) {
             resetStyle();
@@ -134,9 +136,8 @@ public class GameController {
         StackPane.setAlignment(buttonBox, Pos.BOTTOM_CENTER);
         buttonBox.setTranslateY(60);
         gamePane.getChildren().add(buttonBox);
-
-        //TODO: make the windows elements no interactible with other than restart and mainmenu buttons.
-
+        //TODO: make the windows elements not interactible with, other than restart and mainmenu buttons.
+        //TODO: add victory and defeat music
     }
 
     private void restartGame() {

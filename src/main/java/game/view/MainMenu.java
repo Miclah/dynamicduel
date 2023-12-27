@@ -44,7 +44,7 @@ public class MainMenu extends Application {
         Button exitButton = new Button("Exit");
         
         startButton.setOnAction(e -> {
-            MusicPlayer.stopMusic();
+            MusicPlayer.stopMusic(true);
             Stage gameStage = new Stage();
             GameView.displayGame(gameStage);
             primaryStage.hide(); 
@@ -87,8 +87,8 @@ public class MainMenu extends Application {
         });
 
         primaryStage.setOnCloseRequest(e -> {
-        MusicPlayer.stopMusic();
-        primaryStage.close();
+            MusicPlayer.stopMusic(true);
+            primaryStage.close();
         });
 
         primaryStage.show();
