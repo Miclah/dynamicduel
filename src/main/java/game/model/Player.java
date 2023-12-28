@@ -72,7 +72,7 @@ public class Player {
      * Resets the player's health to a default value.
      */
     public void resetHealth() {
-        this.health = 95;
+        this.health = 100;
     }
 
     /**

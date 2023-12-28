@@ -25,19 +25,29 @@ public class CardController {
         cardImageView.setOnMouseReleased(this::handleMouseReleased);
     }
 
+    /**
+     * Handles the event when the mouse is pressed on a card.
+     *
+     * @param event The mouse event.
+     */
     private void handleMousePressed(MouseEvent event) {
         if (event.getButton() == MouseButton.PRIMARY) {
             ImageView cardImageView = (ImageView) event.getSource();
             this.xOffset = event.getSceneX() - cardImageView.getTranslateX();
             this.yOffset = event.getSceneY() - cardImageView.getTranslateY();
 
-            cardImageView.setEffect(new DropShadow());
+            cardImageView.setEffect(new DropShadow()); // Creates a shadow effect when the card is clicked
 
         } else if (event.getButton() == MouseButton.SECONDARY) {
             System.out.println("Right mouse button clicked");
         }
     }
 
+    /**
+     * Handles the event when the mouse is dragged while holding down the primary (left) button.
+     *
+     * @param event The mouse event.
+     */
     private void handleMouseDragged(MouseEvent event) {
         if (event.getButton() == MouseButton.PRIMARY) {
             ImageView cardImageView = (ImageView) event.getSource();
@@ -49,6 +59,11 @@ public class CardController {
         }
     }
 
+    /**
+     * Handles the event when the mouse is released after dragging a card.
+     *
+     * @param event The mouse event.
+     */
     private void handleMouseReleased(MouseEvent event) {
         if (event.getButton() == MouseButton.PRIMARY) {
             ((ImageView) event.getSource()).setEffect(null);

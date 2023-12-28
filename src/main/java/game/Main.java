@@ -10,16 +10,7 @@ import game.view.MainMenu;
 public class Main extends Application {
 
     /**
-     * The main method to launch the JavaFX application.
-     *
-     * @param args Command-line arguments.
-     */
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    /**
-     * Overrides the start method of Application.
+     * Overrides the main  method of the Main class.
      *
      * @param primaryStage The primary stage for the JavaFX application.
      */

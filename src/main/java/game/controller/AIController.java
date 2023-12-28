@@ -17,7 +17,7 @@ public class AIController {
      * @param drawDeck       The draw deck.
      */
     public static void performTurn(GameController gameController, Player player, DrawDeck drawDeck) {
-        //player.reduceHealth(10);
+        player.reduceHealth(3);
         // Draw a card for the AI
         drawDeck.drawCardForAI();
         // Simulate a delay (e.g., Thread.sleep) to make the AI turn visible

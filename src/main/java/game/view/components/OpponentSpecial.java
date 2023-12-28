@@ -17,8 +17,12 @@ import game.view.GameView;
 
 import java.util.Random;
 
+/**
+ * Oopponent's special card (not implemented) display, including health bar and image.
+ */
 public class OpponentSpecial extends StackPane {
 
+    // Attributes for special card path and number of special cards
     private static final String SPECIAL_CARD_PATH = "/Cards/card_textures/special/special_%d.png";
     private static final int NUM_SPECIAL_CARDS = 8;
 
@@ -28,26 +32,42 @@ public class OpponentSpecial extends StackPane {
     private AI opponentAI;
     private Text healthText;
 
+    /**
+     * Constructs the OpponentSpecial object.
+     *
+     * @param height           The height of the special card display.
+     * @param screenWidth      The width of the screen.
+     * @param screenHeight     The height of the screen.
+     * @param outlineColor     The color of the outline.
+     * @param ai               The AI associated with the opponent.
+     * @param transparentPane  The transparent pane to which health components are added.
+     */
     public OpponentSpecial(double height, double screenWidth, double screenHeight, Color outlineColor, AI ai, Pane transparentPane) {
         this.opponentAI = ai;
         this.opponentAI.resetAIHealth();
+        
+        // Create an outline
         this.outline = new Rectangle(screenWidth - 1600, height, Color.TRANSPARENT);
         this.outline.setStroke(outlineColor);
         this.outline.setStrokeWidth(2);
 
         setTranslateX(height / 2);
         setTranslateY(height / 2);
-        
 
         this.loadSpecialCard();
         this.initializeHealthBar(transparentPane);
 
+        // StackPane to combine outline and special card image
         StackPane wholePane = new StackPane(this.outline, this.specialImageView);
         wholePane.setAlignment(Pos.CENTER);
 
         getChildren().add(wholePane);
     }
 
+    /**
+     * Loads a random special card image.
+     * TODO: Loads a special card chosen by the AI
+     */
     private void loadSpecialCard() {
         Random random = new Random();
         int randomCardNumber = random.nextInt(NUM_SPECIAL_CARDS) + 1;
@@ -64,20 +84,27 @@ public class OpponentSpecial extends StackPane {
         this.specialImageView.setFitWidth(cardWidth);
     }
 
+    /**
+     * Initializes the health bar and text components.
+     *
+     * @param transparentPane The transparent pane to which health components are added.
+     */
     private void initializeHealthBar(Pane transparentPane) {
         StackPane healthBarContainer = new StackPane();
         healthBarContainer.setMaxHeight(20);
         healthBarContainer.setTranslateX(300);
         healthBarContainer.setTranslateY(55);
 
+        // Health bar with a vertical orientation
         this.healthBar = new ProgressBar(this.opponentAI.getHealth() / 100.0);
         healthBarContainer.getTransforms().add(new Rotate(90, 0, 0));
 
-        double adaptedWidth = 1080 / 5.0;
+        double adaptedWidth = GameView.getWindowHeight() / 5.0;
         this.healthBar.setPrefWidth(adaptedWidth);
 
         this.healthBar.setStyle("-fx-accent: #FF3300;");
 
+        // Container styling
         healthBarContainer.setStyle(
                 "-fx-border-color: #FF6600; " +
                         "-fx-border-width: 2; " +
@@ -85,6 +112,7 @@ public class OpponentSpecial extends StackPane {
         );
         healthBarContainer.getChildren().add(this.healthBar);
 
+        // Creates a text object to display the opponent's health
         this.healthText = new Text();
         this.healthText.setFill(Color.BLACK);
         this.healthText.setFont(Font.font(20));
@@ -99,6 +127,9 @@ public class OpponentSpecial extends StackPane {
         this.healthText.setVisible(true);
     }
 
+    /**
+     * Updates the opponent's health bar and text.
+     */
     public void updateAIHealthBarAndText() {
         Platform.runLater(() -> {
             this.healthBar.setProgress(this.opponentAI.getHealth() / 100.0);
@@ -106,6 +137,9 @@ public class OpponentSpecial extends StackPane {
         });
     }
 
+    /**
+     * Updates the opponent's health text.
+     */
     private void updateAIHealthText() {
         Platform.runLater(() -> this.healthText.setText(String.valueOf(this.opponentAI.getHealth())));
     }

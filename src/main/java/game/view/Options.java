@@ -8,14 +8,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * Options menu of the game.
+ * The Options menu of the game.
  */
 public class Options {
 
     /**
      * Displays the Options menu.
      *
-     * @param primaryStage The primary stage for the JavaFX application.
+     * @param primaryStage The primary stage of the application.
      */
     public static void displayOptions(Stage primaryStage) {
         // Set the title of the stage
@@ -27,32 +27,38 @@ public class Options {
         Button aboutButton = new Button("About");
         Button backButton = new Button("Back");
 
-        // Set actions for the buttons
+        // Set action event for the Settings button to display the Settings menu
         settingsButton.setOnAction(e -> {
-            // Display the settings menu
             Settings.displaySettings(primaryStage);
         });
+
+        // Set action event for the Player Stats button (Placeholder action)
         statsButton.setOnAction(e -> System.out.println("Player Stats button clicked"));
+
+        // Set action event for the About button to display the About menu
         aboutButton.setOnAction(e -> {
-            // Display the "about" information
             About.displayAbout(primaryStage);
         });
 
+        // Set action event for the Back button to return to the main menu
         backButton.setOnAction(e -> {
-            // Return to the main menu
             MainMenu mainMenu = new MainMenu();
             mainMenu.start(primaryStage);
         });
 
-        // Create and configure the layout
+        // Create a vertical box to hold the buttons
         VBox vbox = new VBox(20);
         vbox.setAlignment(Pos.CENTER);
         vbox.getChildren().addAll(statsButton, settingsButton, aboutButton, backButton);
 
+        // Create a border pane as the root layout
         BorderPane root = new BorderPane();
-        // Apply styles from the external CSS file
+        root.setCenter(vbox);
+
+        // Add a stylesheet to the root for styling
         root.getStylesheets().add(Options.class.getResource("/Styles/Menu/options.css").toExternalForm());
 
+        // Create the scene with the root layout and set the stage with the scene
         Scene scene = new Scene(root, 800, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
