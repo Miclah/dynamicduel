@@ -1,5 +1,8 @@
 package game.model;
 
+/**
+ * Types of cards in the game along with their associated values.
+ */
 public enum CardType {
     FIRE_50(ElementType.FIRE, 50),
     FIRE_40(ElementType.FIRE, 40),
@@ -17,15 +20,31 @@ public enum CardType {
     private final ElementType elementType;
     private final int value;
 
+    /**
+     * Constructs a card type with the specified element type and value.
+     *
+     * @param elementType The element type of the card.
+     * @param value       The numerical value associated with the card.
+     */
     CardType(ElementType elementType, int value) {
         this.elementType = elementType;
         this.value = value;
     }
 
+    /**
+     * Gets the element type of the card.
+     *
+     * @return The element type.
+     */
     public ElementType getElementType() {
         return this.elementType;
     }
 
+    /**
+     * Gets the numerical value associated with the card.
+     *
+     * @return The card's value.
+     */
     public int getValue() {
         return this.value;
     }

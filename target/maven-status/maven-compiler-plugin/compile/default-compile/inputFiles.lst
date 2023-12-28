@@ -10,7 +10,7 @@ D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\util\MusicPlayer.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\components\GridOutline.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\MainMenu.java
-D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\Backgrounds\AirBackground.java
+D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\backgrounds\AirBackground.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\components\DrawDeck.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\model\CardType.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\model\Player.java
@@ -20,9 +20,10 @@ D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\components\OpponentSpecial.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\Settings.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\controller\AIController.java
+D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\components\PlayingField.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\util\PersistentStorage.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\components\PlayerDeck.java
-D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\Backgrounds\WaterBackground.java
-D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\Backgrounds\FireBackground.java
+D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\backgrounds\WaterBackground.java
+D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\backgrounds\FireBackground.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\model\Card.java
 D:\Michal\School\Programovanie\Informatika 1\dynamicduel\src\main\java\game\view\GameView.java

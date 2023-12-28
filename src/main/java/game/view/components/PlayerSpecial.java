@@ -15,6 +15,7 @@ import javafx.scene.transform.Rotate;
 
 import java.util.Random;
 import game.model.Player;
+import game.view.GameView;
 
 public class PlayerSpecial extends StackPane {
 
@@ -26,22 +27,21 @@ public class PlayerSpecial extends StackPane {
     private ProgressBar healthBar;
     private Player player;
     private Text healthText;
-    
 
     public PlayerSpecial(double height, double screenWidth, double screenHeight, Color outlineColor, Player player, Pane transparentPane) {
         this.player = player;
         player.resetHealth();
-        outline = new Rectangle(screenWidth - 1600, height, Color.TRANSPARENT);
-        outline.setStroke(outlineColor);
-        outline.setStrokeWidth(2);
+        this.outline = new Rectangle(screenWidth - 1600, height, Color.TRANSPARENT);
+        this.outline.setStroke(outlineColor);
+        this.outline.setStrokeWidth(2);
 
         setTranslateX(height / 2);
         setTranslateY(screenHeight - height / 2);
         
-        loadSpecialCard();
-        initializeHealthBar(transparentPane);
+        this.loadSpecialCard();
+        this.initializeHealthBar(transparentPane);
 
-        StackPane wholePane = new StackPane(outline, specialImageView);
+        StackPane wholePane = new StackPane(this.outline, this.specialImageView);
         wholePane.setAlignment(Pos.CENTER);
         
 
@@ -54,14 +54,14 @@ public class PlayerSpecial extends StackPane {
         String imagePath = String.format(SPECIAL_CARD_PATH, randomCardNumber);
         Image specialCardImage = new Image(getClass().getResourceAsStream(imagePath));
 
-        specialImageView = new ImageView(specialCardImage);
-        specialImageView.setPreserveRatio(true);
+        this.specialImageView = new ImageView(specialCardImage);
+        this.specialImageView.setPreserveRatio(true);
         double cardFrontWidth = specialCardImage.getWidth();
         double cardFrontHeight = specialCardImage.getHeight();
         double aspectRatio = cardFrontWidth / cardFrontHeight;
-        double cardWidth = 1080 / 4.0 * aspectRatio;
+        double cardWidth = GameView.getWindowHeight() / 4.0 * aspectRatio;
 
-        specialImageView.setFitWidth(cardWidth);
+        this.specialImageView.setFitWidth(cardWidth);
     }
 
     private void initializeHealthBar(Pane transparentPane) {
@@ -71,43 +71,43 @@ public class PlayerSpecial extends StackPane {
         healthBarContainer.setTranslateX(280);
         healthBarContainer.setTranslateY(1030);
 
-        healthBar = new ProgressBar(player.getHealth() / 100.0);
+        this.healthBar = new ProgressBar(this.player.getHealth() / 100.0);
         healthBarContainer.getTransforms().add(new Rotate(270, 0, 0));
 
-        double adaptedWidth = 1080 / 5.0;
-        healthBar.setPrefWidth(adaptedWidth);
+        double adaptedWidth = GameView.getWindowHeight() / 5.0;
+        this.healthBar.setPrefWidth(adaptedWidth);
 
-        healthBar.setStyle("-fx-accent: #FF3300;");
+        this.healthBar.setStyle("-fx-accent: #FF3300;");
 
         healthBarContainer.setStyle(
                 "-fx-border-color: #FF6600; " +
                 "-fx-border-width: 2; " +
                 "-fx-background-color: linear-gradient(to bottom, #FF3300, #FF6600);"
         );
-        healthBarContainer.getChildren().add(healthBar);
+        healthBarContainer.getChildren().add(this.healthBar);
 
-        healthText = new Text();
-        healthText.setFill(Color.BLACK);
-        healthText.setFont(Font.font(20));
-        updateHealthText(); 
+        this.healthText = new Text();
+        this.healthText.setFill(Color.BLACK);
+        this.healthText.setFont(Font.font(20));
+        this.updateHealthText(); 
 
-        healthText.setTranslateX(280); 
-        healthText.setTranslateY(1050); 
+        this.healthText.setTranslateX(280); 
+        this.healthText.setTranslateY(1050); 
 
-        transparentPane.getChildren().addAll(healthBarContainer, healthText);
-        healthBar.setVisible(true);
+        transparentPane.getChildren().addAll(healthBarContainer, this.healthText);
+        this.healthBar.setVisible(true);
         healthBarContainer.setVisible(true);
-        healthText.setVisible(true);
+        this.healthText.setVisible(true);
     }
 
     public void updateHealthBarAndText() {
         Platform.runLater(() -> {
-            healthBar.setProgress(player.getHealth() / 100.0);
-            updateHealthText();
+            this.healthBar.setProgress(this.player.getHealth() / 100.0);
+            this.updateHealthText();
         });
     }
 
     public void updateHealthText() {
-        Platform.runLater(() -> healthText.setText(String.valueOf(player.getHealth())));
+        Platform.runLater(() -> this.healthText.setText(String.valueOf(this.player.getHealth())));
     }
 }

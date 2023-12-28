@@ -1,4 +1,4 @@
-package game.view.Backgrounds;
+package game.view.backgrounds;
 
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
@@ -15,7 +15,6 @@ import javafx.util.Duration;
 public class AirBackground extends Pane {
 
     public AirBackground() {
-
         this.createCloudParticles();
     }
 

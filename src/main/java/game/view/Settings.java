@@ -21,15 +21,11 @@ import game.util.MusicPlayer;
 public class Settings {
 
     private static final String SETTINGS_FILE_PATH = "src/main/resources/Settings/settings.ini";
-
     private static String currentBackground;
     private static int currentMusicVolume;
-
     private static String selectedBackground;
     private static int musicVolume;
-
     private static Slider musicSlider;
-
 
     public static void displaySettings(Stage primaryStage) {
         primaryStage.setTitle("Dynamic Duel - Settings");
@@ -47,7 +43,7 @@ public class Settings {
         backButton.setOnAction(e -> {
             boolean changesConfirmed = showPopUp(primaryStage, backgroundComboBox);
             if (changesConfirmed) {
-                saveSettings(backgroundComboBox.getValue(), (int) musicSlider.getValue());
+                saveSettings(backgroundComboBox.getValue(), (int)musicSlider.getValue());
                 loadSettings(backgroundComboBox, musicSlider);
                 Options.displayOptions(primaryStage);
             }
@@ -109,9 +105,7 @@ public class Settings {
     }
 
     private static boolean showPopUp(Stage primaryStage, ComboBox<String> backgroundComboBox) {
-        // Check if any changes are made
-
-        boolean isChanged = (!backgroundComboBox.getValue().equals(currentBackground) || (int) musicSlider.getValue() != currentMusicVolume);
+        boolean isChanged = (!backgroundComboBox.getValue().equals(currentBackground) || (int)musicSlider.getValue() != currentMusicVolume);
 
         if (isChanged) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -124,7 +118,6 @@ public class Settings {
 
             return alert.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
         } else {
-            // No changes, return true to indicate that no confirmation is needed
             return true;
         }
     }

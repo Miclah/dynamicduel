@@ -24,12 +24,14 @@ public class StackedDeck extends StackPane {
     private static final String CARD_BACK_IMAGE_PATH = "/Cards/card_textures/card_back.png";
     private static final double OVERLAP_FACTOR = 0.03;
     private static final int SCREEN_HEIGHT = 1080;
+    private static final double INITIAL_X = -510;
+    private static final double X_INCREMENT = 130;
 
     private List<Card> stackedCards;
 
     public StackedDeck(double deckWidth, double deckHeight, DrawDeck drawDeck) {
-        this.stackedCards = loadStackedCards();
-        shuffleDeck();
+        this.stackedCards = this.loadStackedCards();
+        this.shuffleDeck();
     
         Pane cardImagesContainer = new Pane();
         cardImagesContainer.setMaxSize(deckWidth, deckHeight);
@@ -38,49 +40,48 @@ public class StackedDeck extends StackPane {
     
         setMaxHeight(deckHeight);
         setMaxWidth(deckWidth);
-        
     }
 
-    private void shuffleDeck() {
-        Collections.shuffle(stackedCards);
+    public void shuffleDeck() {
+        Collections.shuffle(this.stackedCards);
+    }
+
+    public void addCardsToStackedDeck(List<Card> cards) {
+        this.stackedCards.addAll(cards);
     }
 
     public void drawInitialCards(Pane gameViewPane, boolean isPlayerCard) {
-        Pane cardImagesContainer = (Pane) getChildren().get(0);
-        int numCardsToDraw = Math.min(5, stackedCards.size());
+        Pane cardImagesContainer = (Pane)getChildren().get(0);
+        int numCardsToDraw = Math.min(5, this.stackedCards.size());
 
         for (int i = 0; i < numCardsToDraw; i++) {
-            double initialX = -510;
             double initialY = 380; 
-            double xIncrement = 130; 
-            drawCard(i, cardImagesContainer, initialX + i * xIncrement, initialY, isPlayerCard);
+            this.drawCard(i, cardImagesContainer, INITIAL_X + i * X_INCREMENT, initialY, isPlayerCard);
 
         }
     
-        updateStackedDeck();
+        this.updateStackedDeck();
         List<Node> copyOfChildren = new ArrayList<>(cardImagesContainer.getChildren());
         copyOfChildren.forEach(cardImageView -> gameViewPane.getChildren().add(cardImageView));
     }
 
     public void drawInitialCardsForAI(Pane gameViewPane, boolean isPlayerCard) {
         Pane cardAIContainer = new Pane();
-        int numCardsToDraw = Math.min(5, stackedCards.size());
+        int numCardsToDraw = Math.min(5, this.stackedCards.size());
 
         for (int i = 0; i < numCardsToDraw; i++) {
-            double initialX = -510;
             double initialY = -380;
-            double xIncrement = 130;
-            drawCard(i, cardAIContainer, initialX + i * xIncrement, initialY, isPlayerCard);
+            this.drawCard(i, cardAIContainer, INITIAL_X + i * X_INCREMENT, initialY, isPlayerCard);
         }
 
-        updateStackedDeck();
+        this.updateStackedDeck();
         List<Node> copyOfChildren = new ArrayList<>(cardAIContainer.getChildren());
         copyOfChildren.forEach(cardImageView -> gameViewPane.getChildren().add(cardImageView));
     }
     
     public void drawCard(int index, Pane cardImagesContainer, double x, double y, boolean isPlayerCard) {
-        if (!stackedCards.isEmpty() && index < stackedCards.size()) {
-            Card card = stackedCards.get(index);
+        if (!this.stackedCards.isEmpty() && index < this.stackedCards.size()) {
+            Card card = this.stackedCards.get(index);
 
             ImageView cardImageView = new ImageView();
             cardImageView.setImage(isPlayerCard ? card.getFrontImage() : card.getBackImage());
@@ -101,10 +102,10 @@ public class StackedDeck extends StackPane {
                 .then(isPlayerCard ? card.getFrontImage() : card.getBackImage())
                 .otherwise(isPlayerCard ? card.getBackImage() : card.getFrontImage()));
 
-        cardImagesContainer.getChildren().add(cardImageView);
+            cardImagesContainer.getChildren().add(cardImageView);
 
             card.setFlipped(true);
-            stackedCards.remove(card);
+            this.stackedCards.remove(card);
         }
     }
     
@@ -113,10 +114,10 @@ public class StackedDeck extends StackPane {
 
         double overlap = getMaxHeight() * OVERLAP_FACTOR;
 
-        int numCardsToShow = Math.min(3, stackedCards.size());
+        int numCardsToShow = Math.min(3, this.stackedCards.size());
 
         for (int i = 0; i < numCardsToShow; i++) {
-            Card card = stackedCards.get(i);
+            Card card = this.stackedCards.get(i);
 
             ImageView cardImageView = new ImageView(card.getBackImage());
             cardImageView.setPreserveRatio(true);
@@ -185,7 +186,7 @@ public class StackedDeck extends StackPane {
     }
     
     public int getRemainingCardCount() {
-        return stackedCards.size();
+        return this.stackedCards.size();
     }
 
     public static int getInitialCardCount() {

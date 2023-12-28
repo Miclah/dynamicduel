@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 import java.io.File;
 
@@ -73,14 +74,17 @@ public class MusicPlayer {
     
     private static void setGameMusicLooping(boolean loop, String nextMusic) {
         if (!isGameMusicLooping && mediaPlayer != null) {
+            isGameMusicLooping = true;
+    
             mediaPlayer.setOnEndOfMedia(() -> {
                 if (loop) {
-                    playMusic(nextMusic);
+                    mediaPlayer.seek(Duration.ZERO);
+                    mediaPlayer.play();
                 }
             });
-            isGameMusicLooping = true;
         }
     }
+    
     
     private static void handleMusicLoadError() {
         if (!isPopupShown) {

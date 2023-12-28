@@ -47,6 +47,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>game.Main</mainClass>
+                            <moduleName>dynamicduel</moduleName>
                         </configuration>
                     </execution>
                 </executions>

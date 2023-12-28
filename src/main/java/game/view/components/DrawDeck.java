@@ -29,12 +29,12 @@ public class DrawDeck extends StackPane {
         this.stackedDeck = new StackedDeck(width, height, this);
         this.playerDeck = playerDeck;
 
-        StackPane cardsPane = new StackPane(stackedDeck);
+        StackPane cardsPane = new StackPane(this.stackedDeck);
         cardsPane.setAlignment(Pos.CENTER);
 
-        cardCount = new Text("Cards Left: " + stackedDeck.getRemainingCardCount());
-        cardCount.setFill(Color.BLACK);
-        HBox textHBox = new HBox(cardCount);
+        this.cardCount = new Text("Cards Left: " + this.stackedDeck.getRemainingCardCount());
+        this.cardCount.setFill(Color.BLACK);
+        HBox textHBox = new HBox(this.cardCount);
         textHBox.setAlignment(Pos.BOTTOM_CENTER);
         textHBox.setTranslateY(-30);
 
@@ -44,42 +44,46 @@ public class DrawDeck extends StackPane {
         getChildren().add(wholePane);
     }
 
+    public StackedDeck getStackedDeck() {
+        return this.stackedDeck;
+    }
+
     public void drawInitialCards(Pane gameViewPane, boolean isPlayerCard) {
-        if (!initialDrawn) {
-            stackedDeck.drawInitialCards(gameViewPane, isPlayerCard);
-            initialDrawn = true;
-            updateCardCount();
+        if (!this.initialDrawn) {
+            this.stackedDeck.drawInitialCards(gameViewPane, isPlayerCard);
+            this.initialDrawn = true;
+            this.updateCardCount();
         }
     }
 
     public void drawInitialCardsForAI(Pane gameViewPane, boolean isPlayerCard) {
-        stackedDeck.drawInitialCardsForAI(gameViewPane, isPlayerCard);
-        updateCardCount();
+        this.stackedDeck.drawInitialCardsForAI(gameViewPane, isPlayerCard);
+        this.updateCardCount();
     }
 
     public void drawCardForAI() {
-        Pane cardImagesContainer = (Pane) getChildren().get(0);
+        Pane cardImagesContainer = (Pane)getChildren().get(0);
         double drawX = -230;
         double drawY = -380;
-        stackedDeck.drawCard(0, cardImagesContainer, drawX, drawY, false); // Pass false to indicate it's an AI card
-        updateCardCount();
+        this.stackedDeck.drawCard(0, cardImagesContainer, drawX, drawY, false); 
+        this.updateCardCount();
     }
 
     public void updateCardCount() {
-        cardCount.setText("Cards Left: " + stackedDeck.getRemainingCardCount());
+        this.cardCount.setText("Cards Left: " + this.stackedDeck.getRemainingCardCount());
     }
 
     //TODO: Fix the ability to draw a card by clicking on the AI's drawn card
     public void enableDrawCardInteraction(DrawDeck drawDeck, Pane gameViewPane, StackPane centerContainer, GameController gameController) {
-        Pane cardImagesContainer = (Pane) getChildren().get(0);
+        Pane cardImagesContainer = (Pane)getChildren().get(0);
         
     
         setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY) {
-                if (!playerDeck.hasDrawnCardThisTurn() && stackedDeck.getRemainingCardCount() > 0) {
+                if (!this.playerDeck.hasDrawnCardThisTurn() && this.stackedDeck.getRemainingCardCount() > 0) {
                     double drawX = 600;
                     double drawY = 380;
-                    handleLeftClick(drawDeck, cardImagesContainer, gameViewPane, centerContainer, drawX, drawY);
+                    this.handleLeftClick(drawDeck, cardImagesContainer, gameViewPane, centerContainer, drawX, drawY);
                 } else {
                     gameController.oneCardRestiction();
                 }
@@ -90,12 +94,12 @@ public class DrawDeck extends StackPane {
     }
     
     private void handleLeftClick(DrawDeck drawDeck, Pane cardImagesContainer, Pane gameViewPane, StackPane centerContainer, double drawX, double drawY) {
-        stackedDeck.drawCard(0, cardImagesContainer, drawX, drawY, true);
+        this.stackedDeck.drawCard(0, cardImagesContainer, drawX, drawY, true);
         drawDeck.updateCardCount();
     
         Node drawnCard = cardImagesContainer.getChildren().remove(cardImagesContainer.getChildren().size() - 1);
         centerContainer.getChildren().add(drawnCard);
-        playerDeck.setCardDrawn(true);
+        this.playerDeck.setCardDrawn(true);
         PlayerDeck.incrementCardsDrawnThisTurn();
         drawnCard.toFront();
     }

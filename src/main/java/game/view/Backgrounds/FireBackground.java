@@ -1,4 +1,4 @@
-package game.view.Backgrounds;
+package game.view.backgrounds;
 
 
 import javafx.animation.Animation;
@@ -19,15 +19,11 @@ import javafx.util.Duration;
 public class FireBackground extends Pane {
 
     public FireBackground() {
-
         this.createFlameAnimation();
-
         this.createFireParticles();
-
     }
 
     private void createFlameAnimation() {
-
         Circle flame = new Circle(150, Color.rgb(255, 140, 0));
         flame.setStroke(Color.rgb(255, 69, 0));
         flame.setStrokeWidth(5);
@@ -56,7 +52,6 @@ public class FireBackground extends Pane {
     }
 
     private void createFireParticles() {
-
         for (int i = 0; i < 200; i++) {
             Circle particle = new Circle(2, Color.rgb(255, 69, 0)); 
 
@@ -80,6 +75,7 @@ public class FireBackground extends Pane {
                     Math.random() * 600,
                     particle.getCenterX(),
                     particle.getCenterY()));
+                    
             PathTransition pathTransition = new PathTransition(Duration.seconds(5 + Math.random() * 5), path, particle);
             pathTransition.setCycleCount(Animation.INDEFINITE);
             pathTransition.setAutoReverse(true);

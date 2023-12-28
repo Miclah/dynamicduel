@@ -1,7 +1,10 @@
 package game.view.components;
 
+import java.util.List;
+
 import game.controller.GameController;
 import game.model.AI;
+import game.model.Card;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
@@ -16,6 +19,7 @@ public class PlayerDeck extends StackPane {
     private boolean cardDrawn;
     private static int cardsDrawnThisTurn;
     private AI opponentAI;
+    private PlayingField playingField;
 
     public PlayerDeck(double width, double height, double screenWidth, double screenHeight, Color outlineColor, GameController gameController, AI opponentAI) {
         Rectangle deckOutline = new Rectangle(width, height, Color.TRANSPARENT);
@@ -29,7 +33,7 @@ public class PlayerDeck extends StackPane {
         setTranslateX(320);
         setTranslateY(760);
 
-        Button endTurnButton = createEndTurnButton();
+        Button endTurnButton = this.createEndTurnButton();
 
         StackPane.setAlignment(endTurnButton, Pos.CENTER);
         endTurnButton.setTranslateX(1475);
@@ -38,11 +42,11 @@ public class PlayerDeck extends StackPane {
         Pane outlinePane = new Pane(deckOutline);
         outlinePane.setMouseTransparent(true);
    
-        gridOutline = new GridOutline(width, height, Color.RED);
-        gridOutline.setVisible(false);
+        this.gridOutline = new GridOutline(width, height, Color.RED);
+        this.gridOutline.setVisible(false);
         setMouseTransparent(false);
         setPickOnBounds(false); 
-        getChildren().addAll(endTurnButton, outlinePane, gridOutline);
+        getChildren().addAll(endTurnButton, outlinePane, this.gridOutline);
     }
 
     private Button createEndTurnButton() {
@@ -51,19 +55,30 @@ public class PlayerDeck extends StackPane {
         endTurnButton.setMinSize(70, 70);
         endTurnButton.setMaxSize(70, 70);
         endTurnButton.setText("End\nTurn");
-        endTurnButton.setOnAction(e -> endTurnButtonClicked());
+        endTurnButton.setOnAction(e -> this.endTurnButtonClicked());
         return endTurnButton;
     }
 
     private void endTurnButtonClicked() {
-        if (cardDrawn) {
+        if (this.cardDrawn) {
             System.out.println("Player ended turn");
-            gameController.startOpponentTurn();
+            this.gameController.startOpponentTurn();
             this.cardDrawn = false;
-            opponentAI.reduceAIHealth(60); 
+            this.opponentAI.reduceAIHealth(60); 
+
+            List<Card> cardsInPlayingField = this.playingField.getWaitingCards();
+
+            if (!cardsInPlayingField.isEmpty()) {
+                this.gameController.addCardsToWaitingList(cardsInPlayingField);
+
+            }
         } else {
-            gameController.displayDrawCardMessage();
+            this.gameController.displayDrawCardMessage();
         }
+    }
+
+    public void setPlayingField(PlayingField playingField) {
+        this.playingField = playingField;
     }
 
     public void setCardDrawn(boolean cardDrawn) {

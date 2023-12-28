@@ -9,6 +9,7 @@ import game.view.components.OpponentDeck;
 import game.view.components.OpponentSpecial;
 import game.view.components.PlayerDeck;
 import game.view.components.PlayerSpecial;
+import game.view.components.PlayingField;
 import game.view.components.StackedDeck;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -102,9 +103,13 @@ public class GameView {
         OpponentDeck opponentDeckArea = new OpponentDeck(1600, 320, WINDOW_WIDTH, WINDOW_HEIGHT, Color.ORANGE);
         OpponentSpecial opponentSpecialArea = new OpponentSpecial(WINDOW_HEIGHT - 760, WINDOW_WIDTH, WINDOW_HEIGHT, Color.GREEN, ai, transparentPane);
         DrawDeck drawDeckArea = new DrawDeck(250, 440, WINDOW_WIDTH, WINDOW_HEIGHT, Color.BLUE, playerDeckArea);
+        PlayingField playingFieldArea = new PlayingField(1350, 440, WINDOW_WIDTH, WINDOW_HEIGHT, Color.PURPLE, gameController);
 
-        root.getChildren().addAll(playerDeckArea, playerSpecialArea, opponentDeckArea, opponentSpecialArea, drawDeckArea);
+        playingFieldArea.setStackedDeck(drawDeckArea.getStackedDeck());
+        playerDeckArea.setPlayingField(playingFieldArea);
+        root.getChildren().addAll(playerDeckArea, playingFieldArea, playerSpecialArea, opponentDeckArea, opponentSpecialArea, drawDeckArea);
         gameController.setDrawDeck(drawDeckArea);
+        gameController.setPlayingField(playingFieldArea);
         player.setPlayerSpecial(playerSpecialArea);
         ai.setGameController(gameController);
         ai.setOpponentSpecial(opponentSpecialArea);

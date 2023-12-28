@@ -1,4 +1,4 @@
-package game.view.Backgrounds;
+package game.view.backgrounds;
 
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;

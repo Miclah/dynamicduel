@@ -5,10 +5,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * Controls the interactions with game cards, such as dragging and clicking.
+ */
 public class CardController {
-    private double xOffset, yOffset;
-    
+    private double xOffset;
+    private double yOffset;
 
+    /**
+     * Sets up interactions for a card image view.
+     *
+     * @param cardImageView The image view of the card.
+     */
     public void setupCardInteraction(ImageView cardImageView) {
         cardImageView.setPreserveRatio(true);
 
@@ -20,11 +28,10 @@ public class CardController {
     private void handleMousePressed(MouseEvent event) {
         if (event.getButton() == MouseButton.PRIMARY) {
             ImageView cardImageView = (ImageView) event.getSource();
-            xOffset = event.getSceneX() - cardImageView.getTranslateX();
-            yOffset = event.getSceneY() - cardImageView.getTranslateY();
+            this.xOffset = event.getSceneX() - cardImageView.getTranslateX();
+            this.yOffset = event.getSceneY() - cardImageView.getTranslateY();
 
             cardImageView.setEffect(new DropShadow());
-            
 
         } else if (event.getButton() == MouseButton.SECONDARY) {
             System.out.println("Right mouse button clicked");
