@@ -105,7 +105,7 @@ public class GameController {
     /**
      * Displays a message indicating the need to draw a card.
      */
-    public void displayDrawCardMessage() {
+    public void drawCardMessage() {
         this.resetStyle();
         this.displayTurnMessage("Draw a card before ending your turn!");
     }
@@ -149,7 +149,7 @@ public class GameController {
      * Checks the victory condition and displays a victory message if met.
      */
     public void checkVictoryCondition() {
-        if (this.ai.getHealth() <= 0) {
+        if (this.ai.getAIHealth() <= 0) {
             this.displayEndGameMessage("Victory!");
         }
     }

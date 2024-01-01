@@ -46,7 +46,7 @@ public class PlayerSpecial extends StackPane {
      */
     public PlayerSpecial(double height, double screenWidth, double screenHeight, Color outlineColor, Player player, Pane transparentPane) {
         this.player = player;
-        player.resetHealth();
+    
 
         // Create the outline for the special card area
         this.outline = new Rectangle(screenWidth - 1600, height, Color.TRANSPARENT);
@@ -138,7 +138,7 @@ public class PlayerSpecial extends StackPane {
     /**
      * Updates the health bar and associated text
      */
-    public void updateHealthBarAndText() {
+    public void updatePlayerInterface() {
         Platform.runLater(() -> {
             this.healthBar.setProgress(this.player.getHealth() / 100.0);
             this.updateHealthText();

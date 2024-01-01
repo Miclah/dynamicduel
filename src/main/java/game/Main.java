@@ -6,11 +6,27 @@ import game.view.MainMenu;
 
 /**
  * The main entry point for the Dynamic Duel game.
+ * @author Michal Petrán
+ * @version 0.8
  */
 public class Main extends Application {
 
+     /**
+     * Not used in JavaFX application
+     * 
+     * @param args Command-line arguments (not used in this application).
+     */
+    public static void main(String[] args, Stage primaryStage) {
+        // Launch the JavaFX application
+
+        MainMenu mainMenu = new MainMenu();
+        // Start the main menu and pass the primary stage
+        mainMenu.start(primaryStage);
+        launch(args);
+    }
+
     /**
-     * Overrides the main  method of the Main class.
+     * Starts the game
      *
      * @param primaryStage The primary stage for the JavaFX application.
      */

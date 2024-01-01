@@ -33,7 +33,7 @@ public class AI {
      *
      * @return The AI's health.
      */
-    public int getHealth() {
+    public int getAIHealth() {
         return this.aiHealth;
     }
 
@@ -64,14 +64,14 @@ public class AI {
      */
     private void updateAIHealth() {
         if (this.opponentSpecialArea != null) {
-            this.opponentSpecialArea.updateAIHealthBarAndText();
+            this.opponentSpecialArea.updateAIInterface();
         }
     }
 
     /**
      * Resets the AI player's health to a default value.
      */
-    public void resetAIHealth() {
+    private void resetAIHealth() {
         this.aiHealth = 100;
     }
 

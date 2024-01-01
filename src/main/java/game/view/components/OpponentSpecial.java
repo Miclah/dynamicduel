@@ -44,7 +44,7 @@ public class OpponentSpecial extends StackPane {
      */
     public OpponentSpecial(double height, double screenWidth, double screenHeight, Color outlineColor, AI ai, Pane transparentPane) {
         this.opponentAI = ai;
-        this.opponentAI.resetAIHealth();
+
         
         // Create an outline
         this.outline = new Rectangle(screenWidth - 1600, height, Color.TRANSPARENT);
@@ -96,7 +96,7 @@ public class OpponentSpecial extends StackPane {
         healthBarContainer.setTranslateY(55);
 
         // Health bar with a vertical orientation
-        this.healthBar = new ProgressBar(this.opponentAI.getHealth() / 100.0);
+        this.healthBar = new ProgressBar(this.opponentAI.getAIHealth() / 100.0);
         healthBarContainer.getTransforms().add(new Rotate(90, 0, 0));
 
         double adaptedWidth = GameView.getWindowHeight() / 5.0;
@@ -130,9 +130,9 @@ public class OpponentSpecial extends StackPane {
     /**
      * Updates the opponent's health bar and text.
      */
-    public void updateAIHealthBarAndText() {
+    public void updateAIInterface() {
         Platform.runLater(() -> {
-            this.healthBar.setProgress(this.opponentAI.getHealth() / 100.0);
+            this.healthBar.setProgress(this.opponentAI.getAIHealth() / 100.0);
             this.updateAIHealthText();
         });
     }
@@ -141,6 +141,6 @@ public class OpponentSpecial extends StackPane {
      * Updates the opponent's health text.
      */
     private void updateAIHealthText() {
-        Platform.runLater(() -> this.healthText.setText(String.valueOf(this.opponentAI.getHealth())));
+        Platform.runLater(() -> this.healthText.setText(String.valueOf(this.opponentAI.getAIHealth())));
     }
 }

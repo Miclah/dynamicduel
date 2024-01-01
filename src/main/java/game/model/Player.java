@@ -64,14 +64,14 @@ public class Player {
      */
     private void updateHealth() {
         if (this.playerSpecialArea != null) {
-            this.playerSpecialArea.updateHealthBarAndText();
+            this.playerSpecialArea.updatePlayerInterface();
         }
     }
 
     /**
      * Resets the player's health to a default value.
      */
-    public void resetHealth() {
+    private void resetHealth() {
         this.health = 100;
     }
 

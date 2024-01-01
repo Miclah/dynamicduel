@@ -108,7 +108,7 @@ public class PlayerDeck extends StackPane {
             }
         // Else display a message that the player needs to draw a card before ending his turn
         } else {
-            this.gameController.displayDrawCardMessage();
+            this.gameController.drawCardMessage();
         }
     }
 

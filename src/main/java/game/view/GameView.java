@@ -53,7 +53,8 @@ public class GameView {
         // Check if the initial card count is sufficient to start the game
         int remainingCardCount = StackedDeck.getInitialCardCount();
         if (remainingCardCount < 20) {
-            minCardCountErrorPopup(primaryStage);
+            minCardCountPopup
+    (primaryStage);
             return;
         }
 
@@ -191,7 +192,7 @@ public class GameView {
      *
      * @param primaryStage The primary stage of the application.
      */
-    private static void minCardCountErrorPopup(Stage primaryStage) {
+    private static void minCardCountPopup(Stage primaryStage) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Insufficient Cards");
         alert.setHeaderText("Not Enough Cards in the Deck");

@@ -110,7 +110,7 @@ public class DrawDeck extends StackPane {
     /**
      * Updates the card count text.
      */
-    public void updateCardCount() {
+    private void updateCardCount() {
         this.cardCount.setText("Cards Left: " + this.stackedDeck.getRemainingCardCount());
     }
 
