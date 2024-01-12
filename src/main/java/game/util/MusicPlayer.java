@@ -57,7 +57,6 @@ public class MusicPlayer {
      * @param musicPath The path of the music file.
      */
     private static void playMusic(String musicPath) {
-        System.out.println("Attempting to play music: " + musicPath);
         if (!isMusicPlaying) {
             try {
                 File musicFile = new File(musicPath);

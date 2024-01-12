@@ -58,7 +58,7 @@ public class Settings {
             boolean changesConfirmed = showPopUp(primaryStage, backgroundComboBox);
             if (changesConfirmed) {
                 // Save and apply settings, then navigate back
-                saveSettings(backgroundComboBox.getValue(), (int) musicSlider.getValue());
+                saveSettings(backgroundComboBox.getValue(), (int)musicSlider.getValue());
                 loadSettings(backgroundComboBox, musicSlider);
                 Options.displayOptions(primaryStage);
             }
@@ -143,7 +143,7 @@ public class Settings {
      * @return True if changes are confirmed, false otherwise.
      */
     private static boolean showPopUp(Stage primaryStage, ComboBox<String> backgroundComboBox) {
-        boolean isChanged = (!backgroundComboBox.getValue().equals(currentBackground) || (int) musicSlider.getValue() != currentMusicVolume);
+        boolean isChanged = (!backgroundComboBox.getValue().equals(currentBackground) || (int)musicSlider.getValue() != currentMusicVolume);
 
         if (isChanged) {
             // Display confirmation dialog

@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DialogPane;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -42,7 +43,11 @@ public class GameView {
      */
     public static void displayGame(Stage primaryStage) {
 
-        primaryStage.setTitle("Dynamic Duel");   // Set the stage title
+        // Set the title of the stage and a custom icon
+        primaryStage.setTitle("Dynamic Duel");
+        Image customIcon = new Image(GameView.class.getResourceAsStream("/Icon/icon2.png"));
+        primaryStage.getIcons().add(customIcon);
+
         
         // Check if the screen resolution is supported
         if (!isResolutionSupported()) {
@@ -53,8 +58,7 @@ public class GameView {
         // Check if the initial card count is sufficient to start the game
         int remainingCardCount = StackedDeck.getInitialCardCount();
         if (remainingCardCount < 20) {
-            minCardCountPopup
-    (primaryStage);
+            minCardCountPopup(primaryStage);
             return;
         }
 

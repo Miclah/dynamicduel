@@ -3,6 +3,7 @@ package game.view.components;
 import game.controller.CardController;
 import game.model.Card;
 import game.model.CardType;
+import game.view.GameView;
 import javafx.beans.binding.Bindings;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -29,8 +30,6 @@ public class StackedDeck extends StackPane {
     private static final String CARD_BACK_IMAGE_PATH = "/Cards/card_textures/card_back.png";
     // Factor for card overlap
     private static final double OVERLAP_FACTOR = 0.03;
-    // Screen height constant
-    private static final int SCREEN_HEIGHT = 1080;
     // Initial X position for drawing cards
     private static final double INITIAL_X = -510;
     // X increment for drawing cards
@@ -83,7 +82,7 @@ public class StackedDeck extends StackPane {
      */
     public void drawInitialCards(Pane gameViewPane, boolean isPlayerCard) {
         // Get the container for card images
-        Pane cardImagesContainer = (Pane) getChildren().get(0);
+        Pane cardImagesContainer = (Pane)getChildren().get(0);
         
         // Determine the number of cards to draw, limited to 5
         int numCardsToDraw = Math.min(5, this.stackedCards.size());
@@ -165,7 +164,7 @@ public class StackedDeck extends StackPane {
             double cardBackWidth = card.getFrontImage().getWidth();
             double cardBackHeight = card.getFrontImage().getHeight();
             double aspectRatio = cardBackWidth / cardBackHeight;
-            double cardWidth = SCREEN_HEIGHT / 4.0 * aspectRatio;
+            double cardWidth = GameView.getWindowHeight() / 4.0 * aspectRatio;
             cardImageView.setFitWidth(cardWidth);
 
             // Bind the card image property to dynamically switch between front and back images
@@ -205,7 +204,7 @@ public class StackedDeck extends StackPane {
             double cardBackWidth = card.getBackImage().getWidth();
             double cardBackHeight = card.getBackImage().getHeight();
             double aspectRatio = cardBackWidth / cardBackHeight;
-            double cardWidth = SCREEN_HEIGHT / 4.0 * aspectRatio;
+            double cardWidth = GameView.getWindowHeight() / 4.0 * aspectRatio;
             cardImageView.setFitWidth(cardWidth);
 
             cardImageView.setTranslateY(-i * overlap);

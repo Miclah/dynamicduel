@@ -32,7 +32,7 @@ public class CardController {
      */
     private void handleMousePressed(MouseEvent event) {
         if (event.getButton() == MouseButton.PRIMARY) {
-            ImageView cardImageView = (ImageView) event.getSource();
+            ImageView cardImageView = (ImageView)event.getSource();
             this.xOffset = event.getSceneX() - cardImageView.getTranslateX();
             this.yOffset = event.getSceneY() - cardImageView.getTranslateY();
 
@@ -50,7 +50,7 @@ public class CardController {
      */
     private void handleMouseDragged(MouseEvent event) {
         if (event.getButton() == MouseButton.PRIMARY) {
-            ImageView cardImageView = (ImageView) event.getSource();
+            ImageView cardImageView = (ImageView)event.getSource();
             double deltaX = event.getSceneX() - xOffset;
             double deltaY = event.getSceneY() - yOffset;
 
@@ -66,7 +66,7 @@ public class CardController {
      */
     private void handleMouseReleased(MouseEvent event) {
         if (event.getButton() == MouseButton.PRIMARY) {
-            ((ImageView) event.getSource()).setEffect(null);
+            ((ImageView)event.getSource()).setEffect(null);
         }
     }
 }

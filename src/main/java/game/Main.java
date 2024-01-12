@@ -6,6 +6,7 @@ import game.view.MainMenu;
 
 /**
  * The main entry point for the Dynamic Duel game.
+ * To run the game, run this command in cmd: java --module-path "path-to-javafx-lib" --add-modules javafx.controls,javafx.fxml,javafx.media -jar dynamicduel.jar
  * @author Michal Petrán
  * @version 0.8
  */
@@ -16,12 +17,7 @@ public class Main extends Application {
      * 
      * @param args Command-line arguments (not used in this application).
      */
-    public static void main(String[] args, Stage primaryStage) {
-        // Launch the JavaFX application
-
-        MainMenu mainMenu = new MainMenu();
-        // Start the main menu and pass the primary stage
-        mainMenu.start(primaryStage);
+    public static void main(String[] args) {
         launch(args);
     }
 

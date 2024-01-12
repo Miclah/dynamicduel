@@ -25,7 +25,7 @@ public class PlayerSpecial extends StackPane {
     // Path format for special card images
     private static final String SPECIAL_CARD_PATH = "/Cards/card_textures/special/special_%d.png";
     // Number of available special cards
-    private static final int NUM_SPECIAL_CARDS = 8;
+    private static final int NUM_SPECIAL_CARDS = 3;
 
     // Components for the player's special card display
     private Rectangle outline;

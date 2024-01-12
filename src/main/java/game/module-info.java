@@ -7,3 +7,4 @@ module dynamicduel {
     opens game to javafx.fxml;
     exports game;
 }
+

@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -38,8 +39,10 @@ public class MainMenu extends Application {
      */
 
     public void start(Stage primaryStage) {
-        // Set the title of the stage
+        // Set the title of the stage and a custom icon
         primaryStage.setTitle("Dynamic Duel");
+        Image customIcon = new Image(getClass().getResourceAsStream("/Icon/icon2.png"));
+        primaryStage.getIcons().add(customIcon);
 
         // Display music pop-up if not shown before
         if (!PersistentStorage.getBoolean(POPUP_SHOWN_KEY, false)) {

@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.dynamicduel</groupId>
     <artifactId>dynamicduel</artifactId>
-    <version>0.0.1</version>
+    <version>0.8</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
@@ -47,7 +47,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>game.Main</mainClass>
-                            <moduleName>dynamicduel</moduleName>
+                            <moduleName>dynamicduel</moduleName> 
                         </configuration>
                     </execution>
                 </executions>
